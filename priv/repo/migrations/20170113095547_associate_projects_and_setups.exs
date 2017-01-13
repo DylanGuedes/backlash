@@ -1,4 +1,4 @@
-defmodule Labyrinth.Repo.Migrations.AssociateProjectsAndSetups do
+defmodule Backlash.Repo.Migrations.AssociateProjectsAndSetups do
   use Ecto.Migration
 
   def change do

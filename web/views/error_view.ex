@@ -1,5 +1,5 @@
-defmodule Labyrinth.ErrorView do
-  use Labyrinth.Web, :view
+defmodule Backlash.ErrorView do
+  use Backlash.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

@@ -1,8 +1,8 @@
-defmodule Labyrinth.ProjectController do
+defmodule Backlash.ProjectController do
 
-  use Labyrinth.Web, :controller
-  alias Labyrinth.Project
-  alias Labyrinth.Repo
+  use Backlash.Web, :controller
+  alias Backlash.Project
+  alias Backlash.Repo
 
   def index(conn, _params) do
     projects = Repo.all(Project)

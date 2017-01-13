@@ -1,4 +1,4 @@
-defmodule Labyrinth.Mixfile do
+defmodule Backlash.Mixfile do
   use Mix.Project
 
   def project do
@@ -17,7 +17,7 @@ defmodule Labyrinth.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Labyrinth, []},
+    [mod: {Backlash, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex]]
   end

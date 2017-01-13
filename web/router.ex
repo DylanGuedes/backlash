@@ -1,5 +1,5 @@
-defmodule Labyrinth.Router do
-  use Labyrinth.Web, :router
+defmodule Backlash.Router do
+  use Backlash.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule Labyrinth.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Labyrinth do
+  scope "/", Backlash do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -22,7 +22,7 @@ defmodule Labyrinth.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Labyrinth do
+  # scope "/api", Backlash do
   #   pipe_through :api
   # end
 end

@@ -1,7 +1,7 @@
-defmodule Labyrinth.ProjectTest do
-  use Labyrinth.ModelCase
-  alias Labyrinth.Project
-  alias Labyrinth.Setup
+defmodule Backlash.ProjectTest do
+  use Backlash.ModelCase
+  alias Backlash.Project
+  alias Backlash.Setup
 
   @valid_attrs %{name: "niceproject", description: "its nice rly"}
   @valid_attrs2 %{name: "niceproject2", description: "its nice rly"}
@@ -24,13 +24,13 @@ defmodule Labyrinth.ProjectTest do
   end
 
   test "should ensure uniqueness on name" do
-    Labyrinth.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
-    assert {:error, _ }=Labyrinth.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
+    Backlash.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
+    assert {:error, _ }=Backlash.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
   end
 
   test "should ensure relationships" do
-    {:ok, setup} = Labyrinth.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
-    {:ok, project} = Labyrinth.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
+    {:ok, setup} = Backlash.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
+    {:ok, project} = Backlash.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
 
     proj = Repo.preload(project, :setups)
     changeset = Ecto.Changeset.change(proj) |> Ecto.Changeset.put_assoc(:setups, [setup])
@@ -39,9 +39,9 @@ defmodule Labyrinth.ProjectTest do
   end
 
   test "should successfully push setups" do
-    {:ok, setup} = Labyrinth.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
-    {:ok, setup2} = Labyrinth.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs2))
-    {:ok, project} = Labyrinth.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
+    {:ok, setup} = Backlash.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
+    {:ok, setup2} = Backlash.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs2))
+    {:ok, project} = Backlash.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
 
     Project.push_setup(project, setup)
     updt_project = Repo.get(Project, project.id) |> Repo.preload(:setups)

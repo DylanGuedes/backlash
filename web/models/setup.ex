@@ -1,9 +1,9 @@
-defmodule Labyrinth.Setup do
-  use Labyrinth.Web, :model
+defmodule Backlash.Setup do
+  use Backlash.Web, :model
 
   schema "setups" do
     field :name, :string
-    many_to_many :projects, Labyrinth.Project, join_through: "projects_setups"
+    many_to_many :projects, Backlash.Project, join_through: "projects_setups"
     timestamps()
   end
 

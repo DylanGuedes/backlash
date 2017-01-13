@@ -1,3 +1,3 @@
-defmodule Labyrinth.PageView do
-  use Labyrinth.Web, :view
+defmodule Backlash.PageView do
+  use Backlash.Web, :view
 end

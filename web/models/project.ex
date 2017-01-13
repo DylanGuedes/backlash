@@ -1,13 +1,13 @@
-defmodule Labyrinth.Project do
-  use Labyrinth.Web, :model
+defmodule Backlash.Project do
+  use Backlash.Web, :model
   use Ecto.Schema
   import Ecto.Changeset
-  alias Labyrinth.Repo
+  alias Backlash.Repo
 
   schema "projects" do
     field :name, :string
     field :description, :string
-    many_to_many :setups, Labyrinth.Setup, join_through: "projects_setups"
+    many_to_many :setups, Backlash.Setup, join_through: "projects_setups"
     timestamps()
   end
 

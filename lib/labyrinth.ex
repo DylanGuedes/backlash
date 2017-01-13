@@ -1,4 +1,4 @@
-defmodule Labyrinth do
+defmodule Backlash do
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
@@ -9,23 +9,23 @@ defmodule Labyrinth do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(Labyrinth.Repo, []),
+      supervisor(Backlash.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(Labyrinth.Endpoint, []),
-      # Start your own worker by calling: Labyrinth.Worker.start_link(arg1, arg2, arg3)
-      # worker(Labyrinth.Worker, [arg1, arg2, arg3]),
+      supervisor(Backlash.Endpoint, []),
+      # Start your own worker by calling: Backlash.Worker.start_link(arg1, arg2, arg3)
+      # worker(Backlash.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Labyrinth.Supervisor]
+    opts = [strategy: :one_for_one, name: Backlash.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Labyrinth.Endpoint.config_change(changed, removed)
+    Backlash.Endpoint.config_change(changed, removed)
     :ok
   end
 end

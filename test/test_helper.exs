@@ -1,4 +1,4 @@
 ExUnit.start
 
-Ecto.Adapters.SQL.Sandbox.mode(Labyrinth.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(Backlash.Repo, :manual)
 

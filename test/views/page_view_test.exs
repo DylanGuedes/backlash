@@ -1,3 +1,3 @@
-defmodule Labyrinth.PageViewTest do
-  use Labyrinth.ConnCase, async: true
+defmodule Backlash.PageViewTest do
+  use Backlash.ConnCase, async: true
 end

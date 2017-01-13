@@ -1,4 +1,4 @@
-# Labyrinth
+# Backlash
 
 To start your Phoenix app:
 

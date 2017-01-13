@@ -1,4 +1,4 @@
-defmodule Labyrinth.ModelCase do
+defmodule Backlash.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -16,20 +16,20 @@ defmodule Labyrinth.ModelCase do
 
   using do
     quote do
-      alias Labyrinth.Repo
+      alias Backlash.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Labyrinth.ModelCase
+      import Backlash.ModelCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Labyrinth.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Backlash.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Labyrinth.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Backlash.Repo, {:shared, self()})
     end
 
     :ok
@@ -59,7 +59,7 @@ defmodule Labyrinth.ModelCase do
   """
   def errors_on(struct, data) do
     struct.__struct__.changeset(struct, data)
-    |> Ecto.Changeset.traverse_errors(&Labyrinth.ErrorHelpers.translate_error/1)
+    |> Ecto.Changeset.traverse_errors(&Backlash.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
 end

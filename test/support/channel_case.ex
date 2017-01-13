@@ -1,4 +1,4 @@
-defmodule Labyrinth.ChannelCase do
+defmodule Backlash.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -20,22 +20,22 @@ defmodule Labyrinth.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias Labyrinth.Repo
+      alias Backlash.Repo
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
 
 
       # The default endpoint for testing
-      @endpoint Labyrinth.Endpoint
+      @endpoint Backlash.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Labyrinth.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Backlash.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Labyrinth.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Backlash.Repo, {:shared, self()})
     end
 
     :ok

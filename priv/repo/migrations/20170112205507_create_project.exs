@@ -1,4 +1,4 @@
-defmodule Labyrinth.Repo.Migrations.CreateProject do
+defmodule Backlash.Repo.Migrations.CreateProject do
   use Ecto.Migration
 
   def change do

@@ -1,8 +1,8 @@
-defmodule Labyrinth.SetupController do
-  use Labyrinth.Web, :controller
-  alias Labyrinth.Setup
-  alias Labyrinth.Repo
-  alias Labyrinth.Project
+defmodule Backlash.SetupController do
+  use Backlash.Web, :controller
+  alias Backlash.Setup
+  alias Backlash.Repo
+  alias Backlash.Project
 
   def index(conn, _) do
     setups = Repo.all(Setup)

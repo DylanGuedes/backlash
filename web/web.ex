@@ -1,12 +1,12 @@
-defmodule Labyrinth.Web do
+defmodule Backlash.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Labyrinth.Web, :controller
-      use Labyrinth.Web, :view
+      use Backlash.Web, :controller
+      use Backlash.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -30,12 +30,12 @@ defmodule Labyrinth.Web do
     quote do
       use Phoenix.Controller
 
-      alias Labyrinth.Repo
+      alias Backlash.Repo
       import Ecto
       import Ecto.Query
 
-      import Labyrinth.Router.Helpers
-      import Labyrinth.Gettext
+      import Backlash.Router.Helpers
+      import Backlash.Gettext
     end
   end
 
@@ -49,9 +49,9 @@ defmodule Labyrinth.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Labyrinth.Router.Helpers
-      import Labyrinth.ErrorHelpers
-      import Labyrinth.Gettext
+      import Backlash.Router.Helpers
+      import Backlash.ErrorHelpers
+      import Backlash.Gettext
     end
   end
 
@@ -65,10 +65,10 @@ defmodule Labyrinth.Web do
     quote do
       use Phoenix.Channel
 
-      alias Labyrinth.Repo
+      alias Backlash.Repo
       import Ecto
       import Ecto.Query
-      import Labyrinth.Gettext
+      import Backlash.Gettext
     end
   end
 

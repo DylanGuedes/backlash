@@ -1,8 +1,8 @@
-defmodule Labyrinth.SetupControllerTest do
-  use Labyrinth.ConnCase
-  alias Labyrinth.Repo
-  alias Labyrinth.Setup
-  alias Labyrinth.Project
+defmodule Backlash.SetupControllerTest do
+  use Backlash.ConnCase
+  alias Backlash.Repo
+  alias Backlash.Setup
+  alias Backlash.Project
 
   test "GET /setups", %{conn: conn} do
     {:ok, _} = Repo.insert(Setup.changeset(%Setup{}, %{name: "Noosfero-for-fedora25"}))

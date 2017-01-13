@@ -1,5 +1,5 @@
-defmodule Labyrinth.PageControllerTest do
-  use Labyrinth.ConnCase
+defmodule Backlash.PageControllerTest do
+  use Backlash.ConnCase
 
   # test "GET /", %{conn: conn} do
   #   conn = get conn, "/"

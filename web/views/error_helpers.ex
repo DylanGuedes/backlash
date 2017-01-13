@@ -1,4 +1,4 @@
-defmodule Labyrinth.ErrorHelpers do
+defmodule Backlash.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule Labyrinth.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Labyrinth.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(Backlash.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Labyrinth.Gettext, "errors", msg, opts)
+      Gettext.dgettext(Backlash.Gettext, "errors", msg, opts)
     end
   end
 end

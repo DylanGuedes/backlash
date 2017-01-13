@@ -1,7 +1,7 @@
-defmodule Labyrinth.Endpoint do
+defmodule Backlash.Endpoint do
   use Phoenix.Endpoint, otp_app: :labyrinth
 
-  socket "/socket", Labyrinth.UserSocket
+  socket "/socket", Backlash.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,5 +38,5 @@ defmodule Labyrinth.Endpoint do
     key: "_labyrinth_key",
     signing_salt: "f5deJS3N"
 
-  plug Labyrinth.Router
+  plug Backlash.Router
 end

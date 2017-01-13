@@ -1,7 +1,7 @@
-defmodule Labyrinth.ProjectControllerTest do
-  use Labyrinth.ConnCase
-  alias Labyrinth.Repo
-  alias Labyrinth.Project
+defmodule Backlash.ProjectControllerTest do
+  use Backlash.ConnCase
+  alias Backlash.Repo
+  alias Backlash.Project
 
   test "GET /projects", %{conn: conn} do
     {:ok, _} = Repo.insert(Project.changeset(%Project{}, %{name: "Noosfero"}))

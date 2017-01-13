@@ -1,8 +1,8 @@
-defmodule Labyrinth.SetupTest do
-  use Labyrinth.ModelCase
+defmodule Backlash.SetupTest do
+  use Backlash.ModelCase
 
-  alias Labyrinth.Setup
-  alias Labyrinth.Project
+  alias Backlash.Setup
+  alias Backlash.Project
 
   @valid_attrs %{name: "some content"}
   @invalid_attrs %{}
@@ -10,7 +10,7 @@ defmodule Labyrinth.SetupTest do
   test "changeset with valid attributes" do
     changeset = Setup.changeset(%Setup{}, @valid_attrs)
     assert changeset.valid?
-    assert {:ok, _}=Labyrinth.Repo.insert(changeset)
+    assert {:ok, _}=Backlash.Repo.insert(changeset)
   end
 
   test "changeset with invalid attributes" do
@@ -19,13 +19,13 @@ defmodule Labyrinth.SetupTest do
   end
 
   test "should ensure uniqueness" do
-    Labyrinth.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
-    assert {:error, _}=Labyrinth.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
+    Backlash.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
+    assert {:error, _}=Backlash.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
   end
 
   test "should ensure relationships" do
-    {:ok, setup} = Labyrinth.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
-    {:ok, project} = Labyrinth.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
+    {:ok, setup} = Backlash.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
+    {:ok, project} = Backlash.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
 
     setup = Repo.preload(setup, :projects)
     changeset = Ecto.Changeset.change(setup) |> Ecto.Changeset.put_assoc(:projects, [project])
