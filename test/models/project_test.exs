@@ -4,6 +4,7 @@ defmodule Labyrinth.ProjectTest do
   alias Labyrinth.Setup
 
   @valid_attrs %{name: "niceproject", description: "its nice rly"}
+  @valid_attrs2 %{name: "niceproject2", description: "its nice rly"}
   @invalid1 %{name: "a", description: ""}
   @invalid2 %{name: String.duplicate("A", 121), description: "its nice rly"}
 
@@ -35,6 +36,23 @@ defmodule Labyrinth.ProjectTest do
     changeset = Ecto.Changeset.change(proj) |> Ecto.Changeset.put_assoc(:setups, [setup])
     changeset = Repo.update!(changeset)
     assert changeset.setups==[setup]
+  end
+
+  test "should successfully push setups" do
+    {:ok, setup} = Labyrinth.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs))
+    {:ok, setup2} = Labyrinth.Repo.insert(Setup.changeset(%Setup{}, @valid_attrs2))
+    {:ok, project} = Labyrinth.Repo.insert(Project.changeset(%Project{}, @valid_attrs))
+
+    Project.push_setup(project, setup)
+    updt_project = Repo.get(Project, project.id) |> Repo.preload(:setups)
+    assert length(updt_project.setups)==1
+
+    project = Repo.get(Project, project.id)
+    setup2 = Repo.get(Setup, setup2.id)
+
+    Project.push_setup(project, setup2)
+    updt_project = Repo.get(Project, project.id) |> Repo.preload(:setups)
+    assert length(updt_project.setups)==2
   end
 
 end

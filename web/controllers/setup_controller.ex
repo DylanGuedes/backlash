@@ -2,6 +2,7 @@ defmodule Labyrinth.SetupController do
   use Labyrinth.Web, :controller
   alias Labyrinth.Setup
   alias Labyrinth.Repo
+  alias Labyrinth.Project
 
   def index(conn, _) do
     setups = Repo.all(Setup)
@@ -13,15 +14,30 @@ defmodule Labyrinth.SetupController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  def create(conn, %{"setup" => setup_params, "project_id" => project_id}) do
+    project = Repo.get(Project, project_id)
+    changeset = Setup.changeset(%Setup{}, setup_params)
+    case Repo.insert(changeset) do
+      {:ok, stp} ->
+        Project.push_setup(project, stp)
+
+        conn
+        |> render("show.html", setup: stp)
+      {:error, changeset} ->
+        conn
+        |> render("new.html", changeset: changeset)
+    end
+  end
+
   def create(conn, %{"setup" => setup_params}) do
     changeset = Setup.changeset(%Setup{}, setup_params)
     case Repo.insert(changeset) do
       {:ok, stp} ->
         conn
-        |> render "show.html", setup: stp
+        |> render("show.html", setup: stp)
       {:error, changeset} ->
         conn
-        |> render "new.html", changeset: changeset
+        |> render("new.html", changeset: changeset)
     end
   end
 

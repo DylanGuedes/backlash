@@ -2,6 +2,7 @@ defmodule Labyrinth.SetupControllerTest do
   use Labyrinth.ConnCase
   alias Labyrinth.Repo
   alias Labyrinth.Setup
+  alias Labyrinth.Project
 
   test "GET /setups", %{conn: conn} do
     {:ok, _} = Repo.insert(Setup.changeset(%Setup{}, %{name: "Noosfero-for-fedora25"}))
@@ -26,6 +27,21 @@ defmodule Labyrinth.SetupControllerTest do
     post conn, setup_path(conn, :create, %{"setup" => setup_params})
     l2 = length(Repo.all(Setup))
     assert l1+1==l2
+  end
+
+  test "POST /setups with valid attrs and relationship", %{conn: conn} do
+    proj = Repo.insert!(Project.changeset(%Project{}, %{name: "Noosfero", description: "A nice community"}))
+            |> Repo.preload(:setups)
+
+    setup_params = %{"name" => "Noosfero-for-fedora25"}
+    l1 = length(Repo.all(Setup))
+    r1 = length(proj.setups)
+    post conn, setup_path(conn, :create, %{"setup" => setup_params, "project_id" => proj.id})
+    l2 = length(Repo.all(Setup))
+    assert l1+1==l2
+
+    proj = Repo.get(Project, proj.id) |> Repo.preload(:setups)
+    assert length(proj.setups)==r1+1
   end
 
   test "POST /setups with invalid attrs", %{conn: conn} do

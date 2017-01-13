@@ -32,4 +32,5 @@ defmodule Labyrinth.SetupTest do
     changeset = Repo.update!(changeset)
     assert changeset.projects==[project]
   end
+
 end
