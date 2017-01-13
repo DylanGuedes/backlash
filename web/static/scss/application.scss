@@ -1,0 +1,9 @@
+@import "foundation";
+@include foundation-everything;
+@import "motion-ui";
+@include motion-ui-transitions;
+
+main {
+  margin-left: 5px;
+  margin-right: 5px;
+}

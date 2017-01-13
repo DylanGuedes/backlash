@@ -1,7 +1,15 @@
 <h1>Projects</h1>
 
-<%= for project <- @projects do %>
-  <%= project.name %>
-  <%= project.description %>
-<% end %>
+<div class="small-collapse medium-uncollapse large-collapse">
+  <%= for project <- @projects do %>
+    <div class="card">
+      <div class="card-divider">
+        <h4><%= project.name %></h4>
+      </div>
 
+      <div class="card-section">
+        <p><%= project.description %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
