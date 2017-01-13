@@ -1,9 +1,17 @@
-<h1><%= @project.name %></h1>
-<p><%= @project.description %></p>
+<div class="media-object stack-for-small">
+  <div class="media-object-section">
+    <div class="thumbnail">
+      <%= if @project.image do %>
+        <img width=200 src="<%= Backlash.ImageUploader.url({@project.image.file_name, @project.image}) %>"/>
+      <% end %>
+    </div>
+  </div>
 
-<%= if @project.image do %>
-  <img width=200 src="<%= Backlash.ImageUploader.url({@project.image.file_name, @project.image}) %>"/>
-<% end %>
+  <div class="media-object-section">
+    <h4><%= @project.name %></h4>
+    <p><%= @project.description %></p>
+  </div>
+</div>
 
 <h1>Setups for this project</h1>
 <table>
