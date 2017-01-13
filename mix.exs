@@ -2,7 +2,7 @@ defmodule Backlash.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :labyrinth,
+    [app: :backlash,
      version: "0.0.1",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -19,7 +19,7 @@ defmodule Backlash.Mixfile do
   def application do
     [mod: {Backlash, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +37,10 @@ defmodule Backlash.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:arc, "~> 0.6.0"},
+     {:arc_ecto, "~> 0.5.0"}
+   ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

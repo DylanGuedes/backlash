@@ -6,11 +6,11 @@
 use Mix.Config
 
 # General application configuration
-config :labyrinth,
+config :backlash,
   ecto_repos: [Backlash.Repo]
 
 # Configures the endpoint
-config :labyrinth, Backlash.Endpoint,
+config :backlash, Backlash.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "C+qz8m731aAxRQnE9QGQbzhx8KZ8lCc9POv6Yao2UO5VoOs5WJe5mlTtyuSqTjS8",
   render_errors: [view: Backlash.ErrorView, accepts: ~w(html json)],

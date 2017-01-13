@@ -1,6 +1,10 @@
 <h1><%= @project.name %></h1>
 <p><%= @project.description %></p>
 
+<%= if @project.image do %>
+  <img width=200 src="<%= Backlash.ImageUploader.url({@project.image.file_name, @project.image}) %>"/>
+<% end %>
+
 <h1>Setups for this project</h1>
 <table>
   <thead>

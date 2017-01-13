@@ -1,5 +1,5 @@
 defmodule Backlash.Endpoint do
-  use Phoenix.Endpoint, otp_app: :labyrinth
+  use Phoenix.Endpoint, otp_app: :backlash
 
   socket "/socket", Backlash.UserSocket
 
@@ -8,8 +8,11 @@ defmodule Backlash.Endpoint do
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :labyrinth, gzip: false,
+    at: "/", from: :backlash, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
+
+  plug Plug.Static,
+    at: "/uploads", from: Path.expand('./uploads'), gzip: false
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -35,7 +38,7 @@ defmodule Backlash.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_labyrinth_key",
+    key: "_backlash_key",
     signing_salt: "f5deJS3N"
 
   plug Backlash.Router

@@ -20,5 +20,5 @@ defmodule Backlash.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :labyrinth
+  use Gettext, otp_app: :backlash
 end
