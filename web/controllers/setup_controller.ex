@@ -9,9 +9,13 @@ defmodule Labyrinth.SetupController do
     render(conn, "index.html", setups: setups)
   end
 
+  def new(conn, %{"project_id" => project_id}) do
+    changeset = Setup.changeset(%Setup{}, %{})
+    render(conn, "new.html", %{ changeset: changeset, project_id: project_id })
+  end
   def new(conn, _) do
     changeset = Setup.changeset(%Setup{}, %{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", %{ changeset: changeset })
   end
 
   def create(conn, %{"setup" => setup_params, "project_id" => project_id}) do
@@ -28,7 +32,6 @@ defmodule Labyrinth.SetupController do
         |> render("new.html", changeset: changeset)
     end
   end
-
   def create(conn, %{"setup" => setup_params}) do
     changeset = Setup.changeset(%Setup{}, setup_params)
     case Repo.insert(changeset) do

@@ -1,2 +1,4 @@
 <h1><%= @project.name %></h1>
 <p><%= @project.description %></p>
+
+<%= link("Add a setup for this project", to: (setup_path(@conn, :new, %{"project_id" => @project.id}))) %>
