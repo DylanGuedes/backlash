@@ -18,6 +18,7 @@ defmodule Labyrinth.Router do
 
     get "/", PageController, :index
     get "/projects", ProjectController, :index
+    get "/projects/new", ProjectController, :new
   end
 
   # Other scopes may use custom stacks.
