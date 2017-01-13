@@ -17,8 +17,7 @@ defmodule Labyrinth.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/projects", ProjectController, :index
-    get "/projects/new", ProjectController, :new
+    resources "/projects", ProjectController
   end
 
   # Other scopes may use custom stacks.

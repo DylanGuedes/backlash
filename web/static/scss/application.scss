@@ -12,3 +12,18 @@ main {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+.form-container {
+  margin: 0 0 1rem;
+}
+
+[type="text"], textarea {
+  margin: 0;
+}
+
+.help-block {
+  background: #cc4b37;
+  display: block;
+  padding: 10px;
+  color: white;
+}

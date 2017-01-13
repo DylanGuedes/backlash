@@ -9,13 +9,13 @@
   <% ratio = 3 %>
 <% end %>
 
-<div class="row">
+<div class="row horizontal-margin-15">
   <%= for project <- @projects do %>
     <div class="large-<%= ratio %> columns">
-      <div class="horizontal-margin-15">
+      <div>
         <div class="card">
           <div class="card-divider">
-            <h4><%= link(project.name, to: "/projects") %></h4>
+            <h4><%= link(project.name, to: project_path(@conn, :show, project.id)) %></h4>
           </div>
 
           <div class="card-section">
@@ -26,3 +26,5 @@
     </div>
   <% end %>
 </div>
+
+<%= link("New Project", to: project_path(@conn, :new), class: "hollow button") %>

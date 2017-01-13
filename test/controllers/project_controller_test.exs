@@ -13,4 +13,10 @@ defmodule Labyrinth.ProjectControllerTest do
     conn = get conn, "/projects/new"
     assert html_response(conn, 200)
   end
+
+  test "GET /projects/1", %{conn: conn} do
+    {:ok, proj} = Repo.insert(Project.changeset(%Project{}, %{name: "Noosfero"}))
+    conn = get conn, project_path(conn, :show, proj.id)
+    assert html_response(conn, 200) =~ "Noosfero"
+  end
 end
