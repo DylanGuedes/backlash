@@ -19,4 +19,20 @@ defmodule Labyrinth.ProjectControllerTest do
     conn = get conn, project_path(conn, :show, proj.id)
     assert html_response(conn, 200) =~ "Noosfero"
   end
+
+  test "POST /projects with valid attrs", %{conn: conn} do
+    project_params = %{"name" => "Noosfero-for-fedora25"}
+    l1 = length(Repo.all(Project))
+    post conn, project_path(conn, :create, %{"project" => project_params})
+    l2 = length(Repo.all(Project))
+    assert l1+1==l2
+  end
+
+  test "POST /projects with invalid attrs", %{conn: conn} do
+    project_params = %{"name" => "N"}
+    l1 = length(Repo.all(Project))
+    post conn, project_path(conn, :create, %{"project" => project_params})
+    l2 = length(Repo.all(Project))
+    assert l1==l2
+  end
 end

@@ -12,5 +12,7 @@ defmodule Labyrinth.Setup do
     |> cast(params, [:name])
     |> validate_required([:name])
     |> unique_constraint(:name)
+    |> validate_length(:name, [min: 3, max: 120])
   end
+
 end

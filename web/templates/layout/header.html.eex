@@ -8,7 +8,7 @@
             <li><%= link("Home", to: "/") %></li>
           </div>
           <li><%= link("Projects", to: "/projects") %></li>
-          <li><%= link("Setups", to: "/projects") %></li>
+          <li><%= link("Setups", to: "/setups") %></li>
         </ul>
       </div>
 

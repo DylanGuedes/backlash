@@ -1,0 +1,21 @@
+<h1>Setup</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Author</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= for stp <- @setups do %>
+      <tr>
+        <td><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></td>
+        <td><%= stp.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link("New Setup", to: setup_path(@conn, :new), class: "hollow button") %>

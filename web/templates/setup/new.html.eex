@@ -1,0 +1,16 @@
+<h1>New Setup</h1>
+
+<%= form_for @changeset, setup_path(@conn, :create), fn f -> %>
+  <%= if f.errors != [] do %>
+    <div class="alert alert-danger">
+      <p>Wrong data! :(</p>
+    </div>
+  <% end %>
+
+  <div class="form-container">
+    <%= text_input f, :name, placeholder: "Name" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <%= submit "Create Setup", class: "button primary" %>
+<% end %>
