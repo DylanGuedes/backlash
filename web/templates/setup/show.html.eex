@@ -1,1 +1,19 @@
 <h1><%= @setup.name %></h1>
+
+<h1>Related Projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for proj <- @setup.projects do %>
+      <tr>
+        <td><%= proj.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

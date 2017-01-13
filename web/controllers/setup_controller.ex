@@ -15,7 +15,7 @@ defmodule Backlash.SetupController do
   end
   def new(conn, _) do
     changeset = Setup.changeset(%Setup{}, %{})
-    render(conn, "new.html", %{ changeset: changeset })
+    render(conn, "new.html", %{ changeset: changeset, project_id: nil })
   end
 
   def create(conn, %{"setup" => setup_params, "project_id" => project_id}) do
@@ -45,7 +45,7 @@ defmodule Backlash.SetupController do
   end
 
   def show(conn, %{"id" => id}) do
-    stp = Repo.get(Setup, id)
+    stp = Repo.get(Setup, id) |> Repo.preload(:projects)
     conn |> render("show.html", setup: stp)
   end
 

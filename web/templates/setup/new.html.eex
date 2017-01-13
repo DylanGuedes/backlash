@@ -7,6 +7,10 @@
     </div>
   <% end %>
 
+  <%= if @project_id do %>
+    <input name="project_id" type="hidden" value="<%= @project_id %>">
+  <% end %>
+
   <div class="form-container">
     <%= text_input f, :name, placeholder: "Name" %>
     <%= error_tag f, :name %>
