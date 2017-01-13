@@ -1,8 +1,20 @@
 <h1><%= @project.name %></h1>
 <p><%= @project.description %></p>
 
-<%= for stp <- @project.setups do %>
-  <%= stp.name %>
-<% end %>
+<h1>Setups for this project</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Setup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for stp <- @project.setups do %>
+      <tr>
+        <td><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link("Add a setup for this project", to: (setup_path(@conn, :new, %{"project_id" => @project.id}))) %>

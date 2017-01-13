@@ -23,6 +23,8 @@ defmodule Backlash.ProjectController do
     changeset = Project.changeset(%Project{}, project_params)
     case Repo.insert(changeset) do
       {:ok, project} ->
+        project = Repo.preload(project, :setups)
+
         conn
         |> render("show.html", project: project)
 

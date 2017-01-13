@@ -8,10 +8,11 @@
       <th>Project</th>
     </tr>
   </thead>
+
   <tbody>
     <%= for proj <- @setup.projects do %>
       <tr>
-        <td><%= proj.name %></td>
+        <td><%= link(proj.name, to: project_path(@conn, :show, proj.id)) %></td>
       </tr>
     <% end %>
   </tbody>
