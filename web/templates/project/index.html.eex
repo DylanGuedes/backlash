@@ -1,14 +1,27 @@
 <h1>Projects</h1>
 
-<div class="small-collapse medium-uncollapse large-collapse">
-  <%= for project <- @projects do %>
-    <div class="card">
-      <div class="card-divider">
-        <h4><%= project.name %></h4>
-      </div>
+<% ratio = 12 %>
+<% if (rem(length(@projects), 3)==0) do %>
+  <% ratio = 4 %>
+<% end %>
 
-      <div class="card-section">
-        <p><%= project.description %></p>
+<% if (rem(length(@projects), 4)==0) do %>
+  <% ratio = 3 %>
+<% end %>
+
+<div class="row">
+  <%= for project <- @projects do %>
+    <div class="large-<%= ratio %> columns">
+      <div class="horizontal-margin-15">
+        <div class="card">
+          <div class="card-divider">
+            <h4><%= link(project.name, to: "/projects") %></h4>
+          </div>
+
+          <div class="card-section">
+            <p><%= project.description %></p>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
