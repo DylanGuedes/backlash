@@ -9,6 +9,7 @@
           </div>
           <li><%= link("Projects", to: "/projects") %></li>
           <li><%= link("Setups", to: "/setups") %></li>
+          <li><%= link("Targets", to: "/targets") %></li>
         </ul>
       </div>
 

@@ -4,6 +4,7 @@ defmodule Backlash.Setup do
   schema "setups" do
     field :name, :string
     many_to_many :projects, Backlash.Project, join_through: "projects_setups"
+    belongs_to :target, Backlash.Target
     timestamps()
   end
 

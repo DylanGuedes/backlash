@@ -1,0 +1,23 @@
+<h1>Targets</h1>
+
+<div class="small-up-1 medium-up-2 large-up-4" data-equalizer>
+  <%= for target <- @targets do %>
+    <div class="column">
+      <div class="card" data-equalizer-watch>
+        <div class="card-divider">
+          <h4><%= link(target.name, to: target_path(@conn, :show, target.id)) %></h4>
+        </div>
+
+        <%= if target.image do %>
+          <img src="<%= Backlash.ImageUploader.url({target.image.file_name, target.image}) %>"/>
+        <% end %>
+
+        <div class="card-section">
+          <p><%= target.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link("New Target", to: target_path(@conn, :new), class: "hollow button") %>

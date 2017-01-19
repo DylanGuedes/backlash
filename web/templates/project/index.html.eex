@@ -1,21 +1,16 @@
 <h1>Projects</h1>
 
-<% ratio = 12 %>
-<% if (rem(length(@projects), 3)==0) do %>
-  <% ratio = 4 %>
-<% end %>
-
-<% if (rem(length(@projects), 4)==0) do %>
-  <% ratio = 3 %>
-<% end %>
-
-<div class="row small-up-1 medium-up-2 large-up-4" data-equalizer>
+<div class="small-up-1 medium-up-2 large-up-4" data-equalizer>
   <%= for project <- @projects do %>
     <div class="column">
       <div class="card" data-equalizer-watch>
         <div class="card-divider">
           <h4><%= link(project.name, to: project_path(@conn, :show, project.id)) %></h4>
         </div>
+
+        <%= if project.image do %>
+          <img src="<%= Backlash.ImageUploader.url({project.image.file_name, project.image}) %>"/>
+        <% end %>
 
         <div class="card-section">
           <p><%= project.description %></p>

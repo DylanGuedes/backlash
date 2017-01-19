@@ -19,6 +19,7 @@ defmodule Backlash.Router do
     get "/", PageController, :index
     resources "/projects", ProjectController
     resources "/setups", SetupController
+    resources "/targets", TargetController
   end
 
   # Other scopes may use custom stacks.
