@@ -39,7 +39,10 @@ defmodule Backlash.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:arc, "~> 0.6.0"},
-     {:arc_ecto, "~> 0.5.0"}
+     {:arc_ecto, "~> 0.5.0"},
+     {:dialyxir, "~> 0.4", only: [:dev], runtime: false},
+     {:credo, "~> 0.3", only: [:dev, :test]}
+
    ]
   end
 

@@ -1,33 +1,50 @@
 defmodule Backlash.Project do
   @moduledoc """
-  * Project entity
+  * Entity that stores projects.
 
-  Entity related to projects.
+  ## Usage
 
-  ## Examples
-
-      iex> Project.changeset(%Project, %{})
+      iex> Backlash.Project.changeset(%Backlash.Project, %{name: "Noosfero"})
       nil
 
+  ## Attributes
+    
+      * name: Name of the project
+      * description: Description of the project
+      * image: Image related to the project
+      * setups: Relationship m:n with setups
+
   """
+
   use Backlash.Web, :model
   use Ecto.Schema
-  import Ecto.Changeset
   use Arc.Ecto.Schema
+
+  import Ecto.Changeset
 
   alias Backlash.Repo
   alias Backlash.Project
   alias Backlash.Setup
+  alias Backlash.ProjectSetup
 
+  @typedoc """
+  Project struct
+
+  ## Attributes
+      * name
+      * description
+      * image
+      * setups
+  """
   @type t :: %Project{}
-  @type setup :: %Setup{}
 
   schema "projects" do
     field :name, :string
     field :description, :string
     field :image, Backlash.ImageUploader.Type
 
-    many_to_many :setups, Backlash.Setup, join_through: "projects_setups"
+    many_to_many :setups, Backlash.Setup, join_through: ProjectSetup
+
     timestamps()
   end
 
@@ -37,24 +54,14 @@ defmodule Backlash.Project do
     |> validate_required([:name])
     |> unique_constraint(:name)
     |> validate_length(:name, [min: 3, max: 120])
+    |> validate_length(:description, [max: 2000])
     |> cast_attachments(params, [:image])
   end
 
-  @spec associate_with_setup(t, setup) :: t
+  @spec associate_with_setup(t, Setup.t) :: t
   def associate_with_setup(project, setup) do
-    project = Repo.preload(project, :setups)
-    if (length(project.setups)==0) do
-      project
-      |> Ecto.Changeset.change
-      |> Ecto.Changeset.put_assoc(:setups, [setup])
-      |> Repo.update
-    else
-      project
-      |> Ecto.Changeset.change
-      |> Ecto.Changeset.cast(%{"setup_id" => setup.id}, [])
-      |> Ecto.Changeset.cast_assoc(:setups)
-      |> Repo.update
-    end
+    changeset = ProjectSetup.changeset(%ProjectSetup{}, %{project_id: project.id, setup_id: setup.id})
+    Repo.insert(changeset)
   end
 
 end

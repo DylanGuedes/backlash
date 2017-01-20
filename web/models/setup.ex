@@ -9,12 +9,14 @@ defmodule Backlash.Setup do
   alias Backlash.Repo
   alias Backlash.Setup
   alias Backlash.Target
+  alias Backlash.ProjectSetup
 
   @type setup :: %Setup{}
+  @type t :: %Setup{}
 
   schema "setups" do
     field :name, :string
-    many_to_many :projects, Backlash.Project, join_through: "projects_setups"
+    many_to_many :projects, Backlash.Project, join_through: ProjectSetup
     belongs_to :target, Backlash.Target
     timestamps()
   end
