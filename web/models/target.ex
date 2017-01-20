@@ -1,14 +1,34 @@
 defmodule Backlash.Target do
   @moduledoc """
-  Target examples:
-  -> Fedora 25
-  -> Debian Wheezy
+  * Entity take stores the target for a given setup
+
+  ## Usage
+      iex> args = %{name: "Fedora 25"}
+      iex> Backlash.Target.changeset(%Backlash.Target{}, args)
+      %Backlash.Target{}
+
+  ## Attributes
+      * name
+      * description
+      * image
+
   """
   use Backlash.Web, :model
   use Ecto.Schema
-  import Ecto.Changeset
-  alias Backlash.Repo
   use Arc.Ecto.Schema
+
+  import Ecto.Changeset
+
+  alias Backlash.Repo
+  @typedoc """
+  Target struct
+
+  ## Attributes
+      * name
+      * description
+      * image
+  """
+  @type t :: %Backlash.Target{}
 
   schema "targets" do
     field :name, :string
@@ -16,11 +36,13 @@ defmodule Backlash.Target do
     field :image, Backlash.ImageUploader.Type
 
     has_many :setups, Backlash.Setup
+
     timestamps()
   end
 
-  def changeset(model, params \\ :empty) do
-    model
+  @spec changeset(t, map) :: t
+  def changeset(struct, params \\ :empty) do
+    struct
     |> cast(params, [:name, :description])
     |> validate_required([:name])
     |> unique_constraint(:name)

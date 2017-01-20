@@ -1,9 +1,18 @@
 defmodule Backlash.Setup do
   @moduledoc """
-  Setup examples:
-  -> elixir-for-fedora25-script
-  -> postgres-for-ubuntu-script
+  * Entity that stores setups for projects.
+
+  ## Usage
+      iex> args = %{name: "a nice setup"}
+      iex> Backlash.Setup.changeset(%Backlash.Setup{}, args)
+      %Backlash.Setup{}
+
+  ## Attributes
+      * target_id
+      * projects
+      * name
   """
+
   use Backlash.Web, :model
 
   alias Backlash.Repo
@@ -11,18 +20,28 @@ defmodule Backlash.Setup do
   alias Backlash.Target
   alias Backlash.ProjectSetup
 
-  @type setup :: %Setup{}
+  @typedoc """
+  Setup struct
+
+  ## Attributes
+      * target_id
+      * projects
+      * name
+  """
   @type t :: %Setup{}
 
   schema "setups" do
     field :name, :string
+
     many_to_many :projects, Backlash.Project, join_through: ProjectSetup
     belongs_to :target, Backlash.Target
+
     timestamps()
   end
 
-  def changeset(model, params \\ :empty) do
-    model
+  @spec changeset(t, map) :: t
+  def changeset(struct, params \\ :empty) do
+    struct
     |> cast(params, [:name, :target_id])
     |> validate_required([:name])
     |> unique_constraint(:name)
@@ -30,17 +49,7 @@ defmodule Backlash.Setup do
     |> cast_assoc(:target, required: false)
   end
 
-  @spec link_to_target(setup, number) :: Setup
-  def link_to_target(me, target_id) do
-    target = Target |> Repo.get(target_id) |> Repo.preload(:setups)
-
-    me
-    |> Repo.preload(:target)
-    |> Ecto.Changeset.cast(%{target: target}, [])
-    |> Ecto.Changeset.put_assoc(:target, target)
-    |> Repo.update!
-  end
-
+  @spec build :: t
   def build do
     changeset(%Setup{}, %{})
   end

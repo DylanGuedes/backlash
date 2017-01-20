@@ -23,7 +23,6 @@ defmodule Backlash.Project do
   import Ecto.Changeset
 
   alias Backlash.Repo
-  alias Backlash.Project
   alias Backlash.Setup
   alias Backlash.ProjectSetup
 
@@ -36,7 +35,7 @@ defmodule Backlash.Project do
       * image
       * setups
   """
-  @type t :: %Project{}
+  @type t :: %Backlash.Project{}
 
   schema "projects" do
     field :name, :string
@@ -48,8 +47,9 @@ defmodule Backlash.Project do
     timestamps()
   end
 
-  def changeset(model, params \\ :empty) do
-    model
+  @spec changeset(t, map) :: t
+  def changeset(struct, params \\ :empty) do
+    struct
     |> cast(params, [:name, :description])
     |> validate_required([:name])
     |> unique_constraint(:name)
@@ -63,5 +63,4 @@ defmodule Backlash.Project do
     changeset = ProjectSetup.changeset(%ProjectSetup{}, %{project_id: project.id, setup_id: setup.id})
     Repo.insert(changeset)
   end
-
 end

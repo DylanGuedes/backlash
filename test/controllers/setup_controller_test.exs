@@ -8,7 +8,7 @@ defmodule Backlash.SetupControllerTest do
 
   test "GET /setups", %{conn: conn} do
     {:ok, target} = %Target{} |> Target.changeset(%{name: "niceproject"}) |> Repo.insert
-    {:ok, stp} = target |> Ecto.build_assoc(:setups, %{name: "Noosfero-for-fedora25"}) |> Repo.insert
+    {:ok, _} = target |> Ecto.build_assoc(:setups, %{name: "Noosfero-for-fedora25"}) |> Repo.insert
     conn = get conn, "/setups"
     assert html_response(conn, 200) =~ "Noosfero-for-fedora25"
   end

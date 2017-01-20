@@ -10,7 +10,7 @@ defmodule Backlash.SetupTest do
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    {:ok, project} = Repo.insert(Project.changeset(%Project{}, @valid_attrs))
+    {:ok, _} = Repo.insert(Project.changeset(%Project{}, @valid_attrs))
     {:ok, target} = Repo.insert(Target.changeset(%Target{}, @valid_attrs))
 
     changeset = Ecto.build_assoc(target, :setups, @valid_attrs)

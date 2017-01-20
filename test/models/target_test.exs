@@ -57,9 +57,6 @@ defmodule Backlash.TargetTest do
     changeset = Ecto.build_assoc(target, :setups, @valid_attrs2)
     {:ok, setup2} = Backlash.Repo.insert(changeset)
 
-    # Setup.link_to_target(setup, target.id)
-    # Setup.link_to_target(setup2, target.id)
-
     setup = Repo.get(Setup, setup.id)
     setup2 = Repo.get(Setup, setup2.id)
 
