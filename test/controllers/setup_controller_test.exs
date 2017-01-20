@@ -6,7 +6,6 @@ defmodule Backlash.SetupControllerTest do
   alias Backlash.Repo
   alias Backlash.Setup
   alias Backlash.Project
-  alias Backlash.Target
 
   test "GET /setups", %{conn: conn} do
     insert(:setup)

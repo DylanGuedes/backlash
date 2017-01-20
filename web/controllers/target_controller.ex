@@ -10,7 +10,7 @@ defmodule Backlash.TargetController do
   end
 
   def new(conn, changeset: changeset),
-    do: render("new.html", conn, changeset: changeset)
+    do: render(conn, "new.html", changeset: changeset)
   def new(conn, _),
     do: new(conn, changeset: Target.changeset(%Target{}, %{}))
 

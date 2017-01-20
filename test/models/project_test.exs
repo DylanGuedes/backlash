@@ -5,7 +5,6 @@ defmodule Backlash.ProjectTest do
 
   alias Backlash.Project
   alias Backlash.Setup
-  alias Backlash.Target
   alias Backlash.Repo
 
   @invalid1 %{name: "a", description: ""}

@@ -5,6 +5,8 @@ defmodule Backlash.TargetTest do
   alias Backlash.Target
   alias Backlash.Repo
 
+  #TODO use exmachina
+
   @valid_attrs %{name: "some content"}
   @valid_attrs2 %{name: "some zz content"}
   @invalid_attrs %{}
