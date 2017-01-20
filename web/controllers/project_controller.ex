@@ -1,6 +1,6 @@
 defmodule Backlash.ProjectController do
-
   use Backlash.Web, :controller
+
   alias Backlash.Project
   alias Backlash.Repo
 
@@ -9,28 +9,22 @@ defmodule Backlash.ProjectController do
     render conn, "index.html", projects: projects
   end
 
-  def new(conn, _params) do
-    changeset = Project.changeset(%Project{}, %{})
-    render conn, "new.html", changeset: changeset
-  end
+  def new(conn, changeset: changeset), do: render(conn, "new.html", changeset: changeset)
+  def new(conn, _params), do: new(conn, changeset: Project.changeset(%Project{}, %{}))
 
   def show(conn, %{"id" => id}) do
-    project = Repo.get(Project, id) |> Repo.preload(:setups)
-    render conn, "show.html", project: project
+    project = Project |> Repo.get(id) |> Repo.preload(:setups)
+    render(conn, "show.html", project: project)
   end
 
   def create(conn, %{"project" => project_params}) do
     changeset = Project.changeset(%Project{}, project_params)
     case Repo.insert(changeset) do
       {:ok, project} ->
-        project = Repo.preload(project, :setups)
-
-        conn
-        |> render("show.html", project: project)
+        show(conn, %{"id" => project.id})
 
       {:error, changeset} ->
-        conn
-        |> render("new.html", changeset: changeset)
+        new(conn, changeset: changeset)
     end
   end
 

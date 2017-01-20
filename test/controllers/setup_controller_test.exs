@@ -1,11 +1,14 @@
 defmodule Backlash.SetupControllerTest do
   use Backlash.ConnCase
+
   alias Backlash.Repo
   alias Backlash.Setup
   alias Backlash.Project
+  alias Backlash.Target
 
   test "GET /setups", %{conn: conn} do
-    {:ok, _} = Repo.insert(Setup.changeset(%Setup{}, %{name: "Noosfero-for-fedora25"}))
+    {:ok, target} = %Target{} |> Target.changeset(%{name: "niceproject"}) |> Repo.insert
+    {:ok, stp} = target |> Ecto.build_assoc(:setups, %{name: "Noosfero-for-fedora25"}) |> Repo.insert
     conn = get conn, "/setups"
     assert html_response(conn, 200) =~ "Noosfero-for-fedora25"
   end
@@ -16,7 +19,8 @@ defmodule Backlash.SetupControllerTest do
   end
 
   test "GET /projects/1", %{conn: conn} do
-    {:ok, setup} = Repo.insert(Setup.changeset(%Setup{}, %{name: "Noosfero-for-fedora25"}))
+    {:ok, target} = %Target{} |> Target.changeset(%{name: "niceproject"}) |> Repo.insert
+    {:ok, setup} = target |> Ecto.build_assoc(:setups, %{name: "Noosfero-for-fedora25"}) |> Repo.insert
     conn = get conn, setup_path(conn, :show, setup.id)
     assert html_response(conn, 200) =~ "Noosfero-for-fedora25"
   end
@@ -30,17 +34,15 @@ defmodule Backlash.SetupControllerTest do
   end
 
   test "POST /setups with valid attrs and relationship", %{conn: conn} do
-    proj = Repo.insert!(Project.changeset(%Project{}, %{name: "Noosfero", description: "A nice community"}))
-            |> Repo.preload(:setups)
-
+    {:ok, proj} = %Project{} |> Project.changeset(%{name: "Noosfero", description: "A nice community"}) |> Repo.insert
     setup_params = %{"name" => "Noosfero-for-fedora25"}
     l1 = length(Repo.all(Setup))
+    proj = Repo.preload(proj, :setups)
     r1 = length(proj.setups)
-    post conn, setup_path(conn, :create, %{"setup" => setup_params, "project_id" => proj.id})
-    l2 = length(Repo.all(Setup))
-    assert l1+1==l2
 
-    proj = Repo.get(Project, proj.id) |> Repo.preload(:setups)
+    post conn, setup_path(conn, :create, %{"setup" => setup_params, "project_id" => proj.id})
+    assert length(Repo.all(Setup))==l1+1
+    proj = Project |> Repo.get(proj.id) |> Repo.preload(:setups)
     assert length(proj.setups)==r1+1
   end
 

@@ -1,4 +1,7 @@
 defmodule Backlash.ImageUploader do
+  @moduledoc """
+  Module that defines image uploads behavior
+  """
   use Arc.Definition
   use Arc.Ecto.Definition
 

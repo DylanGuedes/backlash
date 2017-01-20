@@ -1,1 +1,18 @@
 <h1><%= @target.name %></h1>
+
+<h2>Setups</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for stp <- @target.setups do %>
+      <tr>
+        <td><%= stp.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

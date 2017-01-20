@@ -1,4 +1,7 @@
 defmodule Backlash do
+  @moduledoc """
+  Backlash main module
+  """
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html

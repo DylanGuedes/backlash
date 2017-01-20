@@ -1,4 +1,9 @@
 defmodule Backlash.Target do
+  @moduledoc """
+  Target examples:
+  -> Fedora 25
+  -> Debian Wheezy
+  """
   use Backlash.Web, :model
   use Ecto.Schema
   import Ecto.Changeset

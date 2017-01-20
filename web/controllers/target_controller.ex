@@ -1,32 +1,32 @@
 defmodule Backlash.TargetController do
   use Backlash.Web, :controller
+
   alias Backlash.Target
   alias Backlash.Repo
 
   def index(conn, _) do
     targets = Repo.all(Target)
-    render conn, targets: targets
+    render(conn, "index.html", targets: targets)
   end
 
-  def new(conn, _) do
-    changeset = Target.changeset(%Target{}, %{})
-    render conn, changeset: changeset
-  end
+  def new(conn, changeset: changeset),
+    do: render("new.html", conn, changeset: changeset)
+  def new(conn, _),
+    do: new(conn, changeset: Target.changeset(%Target{}, %{}))
 
   def create(conn, %{"target" => target_params}) do
     changeset = Target.changeset(%Target{}, target_params)
     case Repo.insert(changeset) do
       {:ok, target} ->
-        conn
-        |> render("show.html", target: target)
+        show(conn, target: target)
+
       {:error, changeset} ->
-        conn
-        |> render("new.html", changeset: changeset)
+        new(conn, changeset: changeset)
     end
   end
 
-  def show(conn, %{"id" => id}) do
-     target = Repo.get(Target, id)
-     render conn, "show.html", target: target
-  end
+  def show(conn, target: target),
+    do: render(conn, "show.html", target: Repo.preload(target, :setups))
+  def show(conn, %{"id" => id}),
+    do: show(conn, target: Target |> Repo.get(id))
 end

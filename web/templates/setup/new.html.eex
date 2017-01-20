@@ -16,5 +16,7 @@
     <%= error_tag f, :name %>
   </div>
 
+  <%= multiple_select(f, :target_id, @targets |> Enum.map(&{&1.name, &1.id})) %>
+
   <%= submit "Create Setup", class: "button primary" %>
 <% end %>
