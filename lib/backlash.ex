@@ -4,6 +4,8 @@ defmodule Backlash do
   """
   use Application
 
+  alias Backlash.Endpoint
+
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
@@ -28,7 +30,7 @@ defmodule Backlash do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Backlash.Endpoint.config_change(changed, removed)
+    Endpoint.config_change(changed, removed)
     :ok
   end
 end

@@ -8,7 +8,6 @@ defmodule Backlash.ProjectSetup do
       %Backlash.ProjectSetup{}
 
   ## Attributes
-    
       * setup_id: Id of the setup of the relationship
       * project_id: Id of the project of the relationship
 
@@ -19,6 +18,7 @@ defmodule Backlash.ProjectSetup do
   alias Backlash.ProjectSetup
   alias Backlash.Project
   alias Backlash.Setup
+  alias Ecto.Changeset
 
   @typedoc """
   ProjectSetup struct
@@ -40,7 +40,7 @@ defmodule Backlash.ProjectSetup do
   @spec changeset(t, map) :: t
   def changeset(struct, params \\ %{}) do
     struct
-    |> Ecto.Changeset.cast(params, [:setup_id, :project_id])
-    |> Ecto.Changeset.validate_required([:setup_id, :project_id])
+    |> Changeset.cast(params, [:setup_id, :project_id])
+    |> Changeset.validate_required([:setup_id, :project_id])
   end
 end

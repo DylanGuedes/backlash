@@ -8,7 +8,6 @@ defmodule Backlash.Project do
       nil
 
   ## Attributes
-    
       * name: Name of the project
       * description: Description of the project
       * image: Image related to the project
@@ -60,7 +59,8 @@ defmodule Backlash.Project do
 
   @spec associate_with_setup(t, Setup.t) :: t
   def associate_with_setup(project, setup) do
-    changeset = ProjectSetup.changeset(%ProjectSetup{}, %{project_id: project.id, setup_id: setup.id})
+    opt = %{project_id: project.id, setup_id: setup.id}
+    changeset = ProjectSetup.changeset(%ProjectSetup{}, opt)
     Repo.insert(changeset)
   end
 end

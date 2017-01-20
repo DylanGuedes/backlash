@@ -11,7 +11,7 @@ defmodule Backlash.SetupController do
     render(conn, "index.html", setups: setups)
   end
 
-  def new(conn, opts=%{changeset: _, project_id: _}) do
+  def new(conn, opts = %{changeset: _, project_id: _}) do
     targets = Repo.all(Target)
     opts = Map.put(opts, :targets, targets)
     render(conn, "new.html", opts)
