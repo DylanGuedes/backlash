@@ -1,20 +1,9 @@
 <header>
-  <nav class="top-bar">
-    <div id="responsive-menu">
-      <div class="top-bar-left">
-
-        <ul class="menu">
-          <div class="top-bar-title">
-            <li><%= link("Home", to: "/") %></li>
-          </div>
-          <li><%= link("Projects", to: "/projects") %></li>
-          <li><%= link("Setups", to: "/setups") %></li>
-          <li><%= link("Targets", to: "/targets") %></li>
-        </ul>
-      </div>
-
-      <div class="top-bar-right">
-      </div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li><%= link("Projects", to: "/projects") %></li>
+      </ul>
     </div>
   </nav>
 </header>
