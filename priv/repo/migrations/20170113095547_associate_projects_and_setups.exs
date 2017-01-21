@@ -7,5 +7,6 @@ defmodule Backlash.Repo.Migrations.AssociateProjectsAndSetups do
       add :setup_id, references(:setups, on_delete: :delete_all)
       timestamps()
     end
+    create unique_index(:projects_setups, [:project_id, :setup_id])
   end
 end

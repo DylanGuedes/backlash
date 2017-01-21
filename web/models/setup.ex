@@ -15,11 +15,13 @@ defmodule Backlash.Setup do
   """
 
   use Backlash.Web, :model
+  use Ecto.Schema
 
   alias Backlash.Repo
   alias Backlash.Setup
   alias Backlash.Target
   alias Backlash.ProjectSetup
+  alias Backlash.Project
 
   @typedoc """
   Setup struct
@@ -55,6 +57,27 @@ defmodule Backlash.Setup do
   @spec build :: t
   def build do
     changeset(%Setup{}, %{})
+  end
+
+  @spec used_projects_setups(t) :: Ecto.Query.t
+  def used_projects_setups(setup) do
+    from p in ProjectSetup, where: p.setup_id==^setup.id
+  end
+
+  @spec used_projects(t) :: Ecto.Query.t
+  def used_projects(setup) do
+    from p in used_projects_setups(setup), join: m in Project, on: p.project_id == m.id, select: m
+  end
+
+  @spec used_projects_ids(t) :: Ecto.Query.t
+  def used_projects_ids(setup) do
+    from p in used_projects_setups(setup), select: p.project_id
+  end
+
+  @spec unused_projects(t) :: Ecto.Query.t
+  def unused_projects(setup) do
+    ids = Repo.all(used_projects_ids(setup))
+    from p in Project, where: not p.id in ^ids
   end
 
 end

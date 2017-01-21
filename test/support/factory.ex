@@ -21,8 +21,6 @@ defmodule Backlash.Factory do
   def setup_factory do
     %Setup{
       name: "Noosfero-for-fedora25",
-      projects: [build(:project)],
-      target: build(:target)
     }
   end
 end

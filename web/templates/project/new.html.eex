@@ -7,20 +7,23 @@
     </div>
   <% end %>
 
-  <div class="input-group">
-    <%= text_input f, :name, placeholder: "Name" %>
+  <div class="form-group">
+    <label>Project name</label>
+    <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
 
-  <div class="input-group">
-    <%= textarea f, :description, placeholder: "Description" %>
+  <div class="form-group">
+    <label>Project description</label>
+    <%= textarea f, :description, placeholder: "Description", class: "form-control" %>
     <%= error_tag f, :description %>
   </div>
 
-  <div class="input-group">
+  <div class="form-group">
+    <label>Project image</label>
     <%= file_input f, :image %>
-    <%= error_tag f, :description %>
+    <%= error_tag f, :image %>
   </div>
 
-  <%= submit "Create Project", class: "button primary" %>
+  <%= submit "Create Project", class: "btn btn-primary" %>
 <% end %>

@@ -43,4 +43,12 @@ defmodule Backlash.ProjectSetup do
     |> Changeset.cast(params, [:setup_id, :project_id])
     |> Changeset.validate_required([:setup_id, :project_id])
   end
+
+  @spec relate(integer, integer) :: Ecto.Changeset.t
+  def relate(project_id, setup_id) do
+    ProjectSetup.changeset(%ProjectSetup{}, %{
+      project_id: project_id,
+      setup_id: setup_id
+    })
+  end
 end

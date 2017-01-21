@@ -13,7 +13,9 @@
     <%= for stp <- @setups do %>
       <tr>
         <td><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></td>
-        <td><%= link(stp.target.name, to: target_path(@conn, :show, stp.target.id)) %></td>
+        <% if stp.target do %>
+          <td><%= link(stp.target.name, to: target_path(@conn, :show, stp.target.id)) %></td>
+        <% end %>
         <td>
           <%= for proj <- stp.projects do %>
             <span class="label label-default">

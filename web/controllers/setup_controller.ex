@@ -5,6 +5,7 @@ defmodule Backlash.SetupController do
   alias Backlash.Repo
   alias Backlash.Project
   alias Backlash.Target
+  alias Backlash.ProjectSetup
 
   def index(conn, _) do
     setups = Repo.all(from p in Setup, preload: [:projects, :target])
@@ -13,7 +14,8 @@ defmodule Backlash.SetupController do
 
   def new(conn, opts = %{changeset: _, project_id: _}) do
     targets = Repo.all(Target)
-    opts = Map.put(opts, :targets, targets)
+    projects = Repo.all(Project)
+    opts = opts |> Map.put(:targets, targets) |> Map.put(:projects, projects)
     render(conn, "new.html", opts)
   end
   def new(conn, %{"project_id" => project_id}),
@@ -52,20 +54,36 @@ defmodule Backlash.SetupController do
   def edit(conn, %{"id" => id}) do
     case Repo.get(Setup, id) do
       setup when is_map(setup) ->
+        setup = Repo.preload(setup, :projects)
         changeset = Setup.changeset(setup, %{})
         targets = Repo.all(Target)
-        render(conn, "edit.html", %{targets: targets, changeset: changeset, setup: setup})
+        projects = Repo.all(Setup.unused_projects(setup))
+        render(conn, "edit.html", %{targets: targets, changeset: changeset, setup: setup, projects: projects})
       _ ->
-        redirect(conn, to: setup_path(@conn, :index))
+        redirect(conn, to: setup_path(conn, :index))
     end
   end
 
   def update(conn, %{"id" => id, "setup" => setup_params}) do
     setup = Repo.get(Setup, id)
-    changeset = Setup.changeset(setup, setup_params)
+    params =
+      case Map.has_key?(setup_params, :projects_ids) do
+        true ->
+          setup_params
+        false ->
+          Map.merge(%{"projects_ids" => []}, setup_params)
+      end
+
+    changeset = Setup.changeset(setup, params)
 
     case Repo.update(changeset) do
       {:ok, setup} ->
+        for proj_id <- params["projects_ids"] do
+          proj_setup = ProjectSetup.relate(proj_id, setup.id)
+          IO.puts proj_id
+          {:ok, _} = Repo.insert(proj_setup)
+        end
+
         conn
         |> put_flash(:info, "Setup updated!")
         |> show(%{"id" => setup.id})
