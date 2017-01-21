@@ -1,0 +1,26 @@
+<h1>Edit Project</h1>
+
+<%= form_for @changeset, project_path(@conn, :update), [multipart: true], fn f -> %>
+  <%= if f.errors != [] do %>
+    <div class="alert alert-danger">
+      <p>Wrong data! :(</p>
+    </div>
+  <% end %>
+
+  <div class="input-group">
+    <%= text_input f, :name, placeholder: "Name" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="input-group">
+    <%= textarea f, :description, placeholder: "Description" %>
+    <%= error_tag f, :description %>
+  </div>
+
+  <div class="input-group">
+    <%= file_input f, :image %>
+    <%= error_tag f, :description %>
+  </div>
+
+  <%= submit "Create Project", class: "button primary" %>
+<% end %>

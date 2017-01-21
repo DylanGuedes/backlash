@@ -10,7 +10,9 @@
 </div>
 
 <h2>Script</h2>
-<pre><code><%= @setup.script %></code></pre> 
+<%= if @setup.script do %>
+  <%= raw(Earmark.to_html(@setup.script)) %>
+<% end %>
 
 <h1>Related Projects</h1>
 

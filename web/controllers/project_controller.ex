@@ -9,8 +9,19 @@ defmodule Backlash.ProjectController do
     render conn, "index.html", projects: projects
   end
 
-  def new(conn, changeset: changeset), do: render(conn, "new.html", changeset: changeset)
-  def new(conn, _params), do: new(conn, changeset: Project.changeset(%Project{}, %{}))
+  def edit(conn, %{"id" => id}) do
+    case Repo.get(Project, id) do
+      user when is_map(user) ->
+        render(conn, "edit.html", changeset: user)
+      _ ->
+        redirect conn, to: Router.Helpers.page_path(conn, :show, "unauthorized")
+    end
+  end
+
+  def new(conn, changeset: changeset),
+    do: render(conn, "new.html", changeset: changeset)
+  def new(conn, _params),
+    do: new(conn, changeset: Project.changeset(%Project{}, %{}))
 
   def show(conn, %{"id" => id}) do
     project = Project |> Repo.get(id) |> Repo.preload([{:setups, :target}])
@@ -25,6 +36,17 @@ defmodule Backlash.ProjectController do
 
       {:error, changeset} ->
         new(conn, changeset: changeset)
+    end
+  end
+
+  def update(conn, %{"id" => id, "project" => project_params}) do
+    changeset = Project.changeset(%Project{}, project_params)
+    case Repo.update(changeset) do
+      {:ok, project} ->
+        show(conn, %{"id" => project.id})
+
+      {:error, changeset} ->
+        edit(conn, changeset: changeset)
     end
   end
 

@@ -16,6 +16,7 @@
     <%= error_tag f, :name %>
   </div>
 
+  <p>Obs: The script will be shown as Markdown</p>
   <div class="form-group">
     <%= textarea f, :script, placeholder: "Script", class: "form-control" %>
     <%= error_tag f, :script %>

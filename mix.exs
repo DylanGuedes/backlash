@@ -42,7 +42,8 @@ defmodule Backlash.Mixfile do
      {:arc_ecto, "~> 0.5.0"},
      {:dialyxir, "~> 0.4", only: [:dev], runtime: false},
      {:credo, "~> 0.3", only: [:dev, :test]},
-     {:ex_machina, "~> 1.0"}
+     {:ex_machina, "~> 1.0"},
+     {:earmark, "~> 1.0"}
 
    ]
   end

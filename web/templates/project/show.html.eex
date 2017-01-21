@@ -11,6 +11,8 @@
   </div>
 </div>
 
+<%= link("Edit Project", to: project_path(@conn, :edit, @project.id)) %>
+
 <h1>Setups for this project</h1>
 <div class="row">
   <%= for stp <- @project.setups do %>
