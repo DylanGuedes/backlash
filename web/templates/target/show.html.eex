@@ -11,7 +11,7 @@
   <tbody>
     <%= for stp <- @target.setups do %>
       <tr>
-        <td><%= stp.name %></td>
+        <td><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></td>
       </tr>
     <% end %>
   </tbody>

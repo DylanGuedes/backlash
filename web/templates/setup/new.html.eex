@@ -16,7 +16,15 @@
     <%= error_tag f, :name %>
   </div>
 
-  <%= multiple_select(f, :target_id, @targets |> Enum.map(&{&1.name, &1.id})) %>
+  <div class="form-container">
+    <%= textarea f, :script, placeholder: "Script" %>
+    <%= error_tag f, :script %>
+  </div>
+
+  <code>
+  </code>
+
+  <%= select(f, :target_id, @targets |> Enum.map(&{&1.name, &1.id})) %>
 
   <%= submit "Create Setup", class: "button primary" %>
 <% end %>

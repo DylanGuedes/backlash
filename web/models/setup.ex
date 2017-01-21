@@ -11,6 +11,7 @@ defmodule Backlash.Setup do
       * target_id
       * projects
       * name
+      * script
   """
 
   use Backlash.Web, :model
@@ -27,11 +28,13 @@ defmodule Backlash.Setup do
       * target_id
       * projects
       * name
+      * script
   """
   @type t :: %Setup{}
 
   schema "setups" do
     field :name, :string
+    field :script, :string
 
     many_to_many :projects, Backlash.Project, join_through: ProjectSetup
     belongs_to :target, Backlash.Target
@@ -42,7 +45,7 @@ defmodule Backlash.Setup do
   @spec changeset(t, map) :: t
   def changeset(struct, params \\ :empty) do
     struct
-    |> cast(params, [:name, :target_id])
+    |> cast(params, [:name, :target_id, :script])
     |> validate_required([:name])
     |> unique_constraint(:name)
     |> validate_length(:name, [min: 3, max: 120])

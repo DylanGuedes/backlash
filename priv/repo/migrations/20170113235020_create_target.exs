@@ -4,7 +4,7 @@ defmodule Backlash.Repo.Migrations.CreateTarget do
   def change do
     create table(:targets) do
       add :name, :string
-      add :description, :string
+      add :description, :text
       add :image, :string
 
       timestamps()

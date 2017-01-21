@@ -55,14 +55,6 @@ exports.config = {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
     },
-    sass: {
-      options: {
-        includePaths: [
-          'node_modules/foundation-sites/scss',
-          'node_modules/motion-ui/src',
-        ]
-      }
-    }
   },
 
   modules: {
@@ -72,10 +64,6 @@ exports.config = {
   },
 
   npm: {
-    enabled: true,
-    globals: {
-      $: 'jquery',
-      jQuery: 'jquery',
-    }
+    enabled: true
   }
 };

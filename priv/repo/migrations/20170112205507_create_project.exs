@@ -4,7 +4,7 @@ defmodule Backlash.Repo.Migrations.CreateProject do
   def change do
     create table(:projects) do
       add :name, :string, null: false
-      add :description, :string
+      add :description, :text
       timestamps()
     end
 
