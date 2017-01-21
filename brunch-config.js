@@ -41,6 +41,7 @@ exports.config = {
   paths: {
     // Dependencies and current project directories to watch
     watched: [
+      "node_modules/jquery/dist",
       "web/static",
       "test/static"
     ],

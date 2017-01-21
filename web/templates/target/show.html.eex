@@ -1,18 +1,29 @@
 <h1><%= @target.name %></h1>
 
-<h2>Setups</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= for stp <- @target.setups do %>
-      <tr>
-        <td><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></td>
-      </tr>
+<div class="media">
+  <div class="media-left">
+    <%= if @target.image do %>
+      <img width=200 src="<%= Backlash.ImageUploader.url({@target.image.file_name, @target.image}) %>"/>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
+
+<h2>Setups for this target</h2>
+<div class="row">
+  <%= for stp <- @target.setups do %>
+    <div class="col-md-3 col-sm-6">
+      <div class="thumbnail">
+        <div class="caption">
+          <h4><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></h4>
+          <div>
+            <%= for proj <- stp.projects do %>
+              <span class="label label-default">
+                <%= link(proj.name, to: project_path(@conn, :show, proj.id)) %>
+              </span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

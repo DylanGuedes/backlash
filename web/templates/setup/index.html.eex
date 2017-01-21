@@ -1,10 +1,11 @@
 <h1>Setup</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Author</th>
+      <th>Target</th>
+      <th>Projects</th>
     </tr>
   </thead>
 
@@ -12,7 +13,14 @@
     <%= for stp <- @setups do %>
       <tr>
         <td><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></td>
-        <td><%= stp.name %></td>
+        <td><%= link(stp.target.name, to: target_path(@conn, :show, stp.target.id)) %></td>
+        <td>
+          <%= for proj <- stp.projects do %>
+            <span class="label label-default">
+              <%= link(proj.name, to: project_path(@conn, :show, proj.id)) %>
+            </span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

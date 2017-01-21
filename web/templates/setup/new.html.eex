@@ -11,20 +11,19 @@
     <input name="project_id" type="hidden" value="<%= @project_id %>">
   <% end %>
 
-  <div class="form-container">
-    <%= text_input f, :name, placeholder: "Name" %>
+  <div class="form-group">
+    <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
 
-  <div class="form-container">
-    <%= textarea f, :script, placeholder: "Script" %>
+  <div class="form-group">
+    <%= textarea f, :script, placeholder: "Script", class: "form-control" %>
     <%= error_tag f, :script %>
   </div>
 
-  <code>
-  </code>
+  <div class="form-group">
+    <%= select(f, :target_id, @targets |> Enum.map(&{&1.name, &1.id}), class: "form-control") %>
+  </div>
 
-  <%= select(f, :target_id, @targets |> Enum.map(&{&1.name, &1.id})) %>
-
-  <%= submit "Create Setup", class: "button primary" %>
+  <%= submit "Create Setup", class: "btn btn-primary" %>
 <% end %>

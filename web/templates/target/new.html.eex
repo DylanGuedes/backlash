@@ -7,14 +7,14 @@
     </div>
   <% end %>
 
-  <div class="form-container">
-    <%= text_input f, :name, placeholder: "Name" %>
+  <div class="form-group">
+    <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
 
-  <div class="form-container">
+  <div class="form-group">
     <%= file_input f, :image %>
   </div>
 
-  <%= submit "Create Target", class: "button primary" %>
+  <%= submit "Create Target", class: "btn btn-primary" %>
 <% end %>

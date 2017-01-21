@@ -1,32 +1,31 @@
-<div class="media-object stack-for-small">
-  <div class="media-object-section">
-    <div class="thumbnail">
-      <%= if @project.image do %>
-        <img width=200 src="<%= Backlash.ImageUploader.url({@project.image.file_name, @project.image}) %>"/>
-      <% end %>
-    </div>
-  </div>
+<h1><%= @project.name %></h1>
 
-  <div class="media-object-section">
-    <h4><%= @project.name %></h4>
+<div class="media">
+  <div class="media-left">
+    <%= if @project.image do %>
+      <img width=200 src="<%= Backlash.ImageUploader.url({@project.image.file_name, @project.image}) %>"/>
+    <% end %>
+  </div>
+  <div class="media-body">
     <p><%= @project.description %></p>
   </div>
 </div>
 
 <h1>Setups for this project</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Setup</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= for stp <- @project.setups do %>
-      <tr>
-        <td><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <%= for stp <- @project.setups do %>
+    <div class="col-md-3 col-sm-6">
+      <div class="thumbnail">
+        <%= if stp.target.image do %>
+          <img src="<%= Backlash.ImageUploader.url({stp.target.image.file_name, stp.target.image})%>"/>
+        <% end %>
 
+        <div class="caption">
+          Setup for <%= stp.target.name %>
+          <%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <%= link("Add a setup for this project", to: (setup_path(@conn, :new, %{"project_id" => @project.id}))) %>

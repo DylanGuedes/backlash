@@ -5,3 +5,7 @@
 body {
   margin: 0;
 }
+
+span.label.label-default a {
+  color: white;
+}

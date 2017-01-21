@@ -13,7 +13,7 @@ defmodule Backlash.ProjectController do
   def new(conn, _params), do: new(conn, changeset: Project.changeset(%Project{}, %{}))
 
   def show(conn, %{"id" => id}) do
-    project = Project |> Repo.get(id) |> Repo.preload(:setups)
+    project = Project |> Repo.get(id) |> Repo.preload([{:setups, :target}])
     render(conn, "show.html", project: project)
   end
 

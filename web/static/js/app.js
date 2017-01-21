@@ -20,10 +20,6 @@ import "phoenix_html";
 
 // import socket from "./socket"
 
-$(document).ready(function() {
-  console.log("ok..\n");
-  $('#setup_script').on('change', function() {
-    console.log("ok..\n");
-    $('code').content(('#setup_script').content());
-  });
-});
+// import $ from "jquery";
+// $(document).ready(function() {});
+

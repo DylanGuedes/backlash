@@ -7,7 +7,7 @@ defmodule Backlash.SetupController do
   alias Backlash.Target
 
   def index(conn, _) do
-    setups = Repo.all(Setup)
+    setups = Repo.all(from p in Setup, preload: [:projects, :target])
     render(conn, "index.html", setups: setups)
   end
 
@@ -45,7 +45,7 @@ defmodule Backlash.SetupController do
   end
 
   def show(conn, setup: setup),
-    do: render(conn, "show.html", setup: Repo.preload(setup, :projects))
+    do: render(conn, "show.html", setup: Repo.preload(setup, [:projects, :target]))
   def show(conn, %{"id" => id}),
     do: show(conn, setup: Repo.get(Setup, id))
 

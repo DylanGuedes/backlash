@@ -7,17 +7,17 @@
     </div>
   <% end %>
 
-  <div class="form-container">
+  <div class="input-group">
     <%= text_input f, :name, placeholder: "Name" %>
     <%= error_tag f, :name %>
   </div>
 
-  <div class="form-container">
+  <div class="input-group">
     <%= textarea f, :description, placeholder: "Description" %>
     <%= error_tag f, :description %>
   </div>
 
-  <div class="form-container">
+  <div class="input-group">
     <%= file_input f, :image %>
     <%= error_tag f, :description %>
   </div>
