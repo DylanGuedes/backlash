@@ -9,3 +9,14 @@ body {
 span.label.label-default a {
   color: white;
 }
+
+.projects-actions {
+  margin-top: 10px;
+}
+
+.script-code {
+  background-color: #eee;
+  padding: 20px;
+  margin: 20px;
+  opacity: 0.8;
+}

@@ -37,4 +37,19 @@ defmodule Backlash.ProjectControllerTest do
     l2 = length(Repo.all(Project))
     assert l1==l2
   end
+
+  test "PUT /projects/1/edit with valid attrs", %{conn: conn} do
+    project = insert(:project)
+    name = project.name
+    proj_params = params_for(:project, name: "a new_name")
+    patch conn, project_path(conn, :update, project, %{"project" => proj_params})
+    updated_project = Repo.get(Project, project.id)
+    refute updated_project.name==name
+  end
+
+  test "GET /projects/1/edit", %{conn: conn} do
+    project = insert(:project)
+    conn = get(conn, project_path(conn, :edit, project))
+    assert html_response(conn, 200) =~ "Noosfero"
+  end
 end

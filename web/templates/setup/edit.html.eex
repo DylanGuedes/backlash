@@ -1,0 +1,26 @@
+<h1>Edit <%= @setup.name %></h1>
+
+<%= form_for @changeset, setup_path(@conn, :update, @setup), fn f -> %>
+  <%= if f.errors != [] do %>
+    <div class="alert alert-danger">
+      <p>Wrong data! :(</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <p>Obs: The script will be shown as Markdown</p>
+  <div class="form-group">
+    <%= textarea f, :script, placeholder: "Script", class: "form-control" %>
+    <%= error_tag f, :script %>
+  </div>
+
+  <div class="form-group">
+    <%= select(f, :target_id, @targets |> Enum.map(&{&1.name, &1.id}), class: "form-control") %>
+  </div>
+
+  <%= submit "Create Setup", class: "btn btn-primary" %>
+<% end %>

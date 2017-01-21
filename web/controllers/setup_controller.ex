@@ -49,4 +49,32 @@ defmodule Backlash.SetupController do
   def show(conn, %{"id" => id}),
     do: show(conn, setup: Repo.get(Setup, id))
 
+  def edit(conn, %{"id" => id}) do
+    case Repo.get(Setup, id) do
+      setup when is_map(setup) ->
+        changeset = Setup.changeset(setup, %{})
+        targets = Repo.all(Target)
+        render(conn, "edit.html", %{targets: targets, changeset: changeset, setup: setup})
+      _ ->
+        redirect(conn, to: setup_path(@conn, :index))
+    end
+  end
+
+  def update(conn, %{"id" => id, "setup" => setup_params}) do
+    setup = Repo.get(Setup, id)
+    changeset = Setup.changeset(setup, setup_params)
+
+    case Repo.update(changeset) do
+      {:ok, setup} ->
+        conn
+        |> put_flash(:info, "Setup updated!")
+        |> show(%{"id" => setup.id})
+
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "Invalid attributes!")
+        |> edit(changeset: changeset)
+    end
+  end
+
 end

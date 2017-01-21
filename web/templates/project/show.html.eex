@@ -11,7 +11,12 @@
   </div>
 </div>
 
-<%= link("Edit Project", to: project_path(@conn, :edit, @project.id)) %>
+<div class="container projects-actions">
+  <div class="btn-group" role="group">
+    <%= link("Edit Project", to: project_path(@conn, :edit, @project.id), class: "btn btn-info") %>
+    <%= link("Delete Project", to: project_path(@conn, :edit, @project.id), class: "btn btn-danger") %>
+  </div>
+</div>
 
 <h1>Setups for this project</h1>
 <div class="row">

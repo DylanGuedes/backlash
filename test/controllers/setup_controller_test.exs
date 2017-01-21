@@ -51,4 +51,19 @@ defmodule Backlash.SetupControllerTest do
     l2 = length(Repo.all(Setup))
     assert l1==(l2)
   end
+
+  test "PUT /setups/1/edit with valid attrs", %{conn: conn} do
+    setup = insert(:setup)
+    name = setup.name
+    setup_params = params_for(:setup, name: "a new_setup")
+    patch conn, setup_path(conn, :update, setup, %{"setup" => setup_params})
+    updated_setup = Repo.get(Setup, setup.id)
+    refute updated_setup.name==name
+  end
+
+  test "GET /projects/1/edit", %{conn: conn} do
+    setup = insert(:setup)
+    conn = get(conn, setup_path(conn, :edit, setup))
+    assert html_response(conn, 200) =~ "Noosfero"
+  end
 end

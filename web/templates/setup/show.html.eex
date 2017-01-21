@@ -11,8 +11,12 @@
 
 <h2>Script</h2>
 <%= if @setup.script do %>
-  <%= raw(Earmark.to_html(@setup.script)) %>
+  <div class="script-code">
+    <%= raw(Earmark.to_html(@setup.script)) %>
+  </div>
 <% end %>
+
+<%= link("Edit this setup", to: setup_path(@conn, :edit, @setup.id)) %>
 
 <h1>Related Projects</h1>
 
