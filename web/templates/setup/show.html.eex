@@ -1,8 +1,7 @@
 <div class="page-header">
   <h1>
     <%= @setup.name %>
-    <small>
-      <% if @setup.target do %>
+    <small><%= if @setup.target_id != nil do %>
         <%= link(@setup.target.name, to: target_path(@conn, :show, @setup.target.id)) %>
       <% end %>
     </small>
@@ -22,10 +21,17 @@
 
 <div class="row">
   <%= for proj <- @setup.projects do %>
-    <div class="col-sm-6 col-md-3">
+    <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
+        <%= if proj.image do %>
+          <img src="<%= Backlash.ImageUploader.url({proj.image.file_name, proj.image}) %>"/>
+        <% end %>
         <div class="caption">
           <h4><%= link(proj.name, to: project_path(@conn, :show, proj.id)) %></h4>
+        </div>
+        <div class="btn-group">
+          <%= link("About", to: project_path(@conn, :show, proj.id), class: "btn btn-info") %>
+          <%= link("De-relate", to: setup_path(@conn, :derelate, @setup.id, proj.id), method: :post, class: "btn btn-danger") %>
         </div>
       </div>
     </div>

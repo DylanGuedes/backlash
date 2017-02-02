@@ -20,6 +20,8 @@ defmodule Backlash.Router do
     resources "/projects", ProjectController
     resources "/setups", SetupController
     resources "/targets", TargetController
+
+    post "/setups/:id/derelate/:project_id", SetupController, :derelate
   end
 
   # Other scopes may use custom stacks.

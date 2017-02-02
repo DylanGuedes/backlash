@@ -95,4 +95,14 @@ defmodule Backlash.SetupController do
     end
   end
 
+  def derelate(conn, %{"id" => id, "project_id" => project_id}) do
+    (from p in ProjectSetup)
+    |> where([p], p.project_id == ^project_id)
+    |> where([p], p.setup_id == ^id)
+    |> Repo.delete_all
+
+    conn
+    |> put_flash(:info, "Setup changed")
+    |> redirect(to: setup_path(conn, :show, id))
+  end
 end

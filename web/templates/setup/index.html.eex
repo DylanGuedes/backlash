@@ -4,8 +4,8 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Target</th>
       <th>Projects</th>
+      <th>Target</th>
     </tr>
   </thead>
 
