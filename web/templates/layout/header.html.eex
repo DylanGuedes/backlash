@@ -1,11 +1,18 @@
 <header>
+  <!-- <div class="prev-header">
+    <center><img class="backlash-logo" src="<%= static_path(@conn, "/images/logo.png") %>"/></center>
+  </div>
+  -->
+
   <nav class="navbar navbar-default">
     <div class="container-fluid">
+
       <ul class="nav navbar-nav">
-        <li><%= link("Projects", to: project_path(@conn, :index)) %></li>
-        <li><%= link("Setups", to: setup_path(@conn, :index)) %></li>
-        <li><%= link("Target", to: target_path(@conn, :index)) %></li>
+        <li><%= link("PROJECTS", to: project_path(@conn, :index)) %></li>
+        <li><%= link("SETUPS", to: setup_path(@conn, :index)) %></li>
+        <li><%= link("TARGETS", to: target_path(@conn, :index)) %></li>
       </ul>
+
     </div>
   </nav>
 </header>

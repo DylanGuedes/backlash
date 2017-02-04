@@ -1,9 +1,32 @@
 /* This file is for your main application css. */
 
+@import "font-awesome";
 @import "header";
+@import "project";
 
 body {
+  font-family: Cantarell;
   margin: 0;
+  background-color: rgba(183, 183, 183, 0.14);
+}
+
+.navbar-default {
+  border: none;
+  background-color: #13073a;
+  border-radius: 0px;
+  padding: 20px 10px;
+}
+
+.nav.navbar-nav li a {
+  color: white;
+  font-weight: 900;
+  font-size: 21px;
+  transition: border-bottom 0.2s ease-in-out;
+}
+
+.nav.navbar-nav li a:hover {
+  color: white;
+  border-bottom: 9px solid white;
 }
 
 span.label.label-default a {
@@ -19,4 +42,114 @@ span.label.label-default a {
   padding: 20px;
   margin: 20px;
   opacity: 0.8;
+}
+
+.prev-header {
+  padding: 10px;
+}
+
+.backlash-logo {
+  opacity: 0.6;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.backlash-logo:hover {
+  opacity: 1;
+}
+
+main {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.sidebar-desktop, .sidebar-mobile {
+  padding-left: 12.5%;
+  padding-right: 12.5%;
+}
+
+.main-content {
+  padding-left: 6.25%;
+  padding-right: 6.25%;
+}
+
+h1.page-title {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 16px;
+  font-family: "Montserrat";
+  text-transform: uppercase;
+}
+
+.projects-index-header {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.project-logo {
+  width: 100px;
+}
+
+.sidebar {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+@media(min-width: 50em) {
+  h1 {
+    font-size: 49px;
+  }
+  h2, .h2 {
+    font-size: 36px;
+  }
+  .project-logo {
+    width: 150px;
+  }
+
+  .project-title {
+    margin-top: 0px;
+  }
+}
+
+.sidebar-desktop {
+  display: none;
+}
+
+@media(min-width: 50em) {
+  .sidebar-desktop {
+    display: block;
+  }
+}
+
+.projects-index-body{
+  margin-bottom: 54px;
+}
+
+.project-status {
+  background-color: #9376AB;
+}
+
+.project-status {
+  font-size: 27px;
+  color: white;
+}
+
+.project-status .icon-text {
+  font-family: Cantarell;
+  margin-left: 5px;
+}
+
+.project-status .item {
+  background-color: #13073a;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.project-body {
+  margin-bottom: 40px;
 }

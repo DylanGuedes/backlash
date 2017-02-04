@@ -19,8 +19,14 @@
     <p class="alert alert-success" role="alert"><%= get_flash(@conn, :success) %></p>
 
     <main role="main">
-      <div class="container">
-        <%= render @view_module, @view_template, assigns %>
+      <div class="row-fluid">
+        <div class="col-md-3 col-xs-0">
+          <%= render "sidebar_desktop.html", conn: @conn %>
+        </div>
+
+        <div class="col-md-9 col-xs-12 main-content">
+          <%= render @view_module, @view_template, assigns %>
+        </div>
       </div>
     </main>
 

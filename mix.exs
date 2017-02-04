@@ -44,7 +44,6 @@ defmodule Backlash.Mixfile do
      {:credo, "~> 0.3", only: [:dev, :test]},
      {:ex_machina, "~> 1.0"},
      {:earmark, "~> 1.0"}
-
    ]
   end
 

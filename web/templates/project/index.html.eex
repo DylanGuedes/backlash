@@ -1,20 +1,46 @@
-<h1>Projects</h1>
+<div class="projects-index-header">
+  <h1 class="page-title">Projects</h1>
+</div>
 
-<div class="row">
+<div class="projects-index-body">
   <%= for project <- @projects do %>
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
+    <div class="row project">
+      <div class="col-xs-4 col-md-2">
         <%= if project.image do %>
-          <img src="<%= Backlash.ImageUploader.url({project.image.file_name, project.image}) %>"/>
+          <img src="<%= Backlash.ImageUploader.url({project.image.file_name, project.image}) %>" class="project-logo"/>
         <% end %>
+      </div>
 
-        <div class="caption">
-          <h4><%= link(project.name, to: project_path(@conn, :show, project.id)) %></h4>
-          <p><%= project.description %></p>
+      <div class="col-md-8 col-xs-8">
+        <h2 class="project-title"><%= link(project.name, to: project_path(@conn, :show, project.id)) %></h4>
+        <p><%= project.description %></p>
+
+        <div class="project-footer">
+          <ul class="nav navbar-nav">
+            <li data-toggle="popover" data-trigger="hover" data-placement="left" data-animation="false" data-content="Stars of this project. Stars are given by users, and express how much they liked this project.">
+              <div class="item project-stars">
+                <center>
+                  <i class="fa fa-star" aria-hidden="true"><span class="icon-text">540</span></i>
+                </center>
+              </div>
+            </li>
+
+            <li data-toggle="popover" data-trigger="hover" data-placement="left" data-content="Setups related to this project. Setups are guides and scripts that solve this project setup to a given platform." data-original-title title>
+              <div class="item project-setups">
+                <center>
+                  <i class="fa fa-terminal" aria-hidden="true"><span class="icon-text">540</span></i>
+                </center>
+              </div>
+            </li>
+          </ul>
         </div>
+
       </div>
     </div>
+
   <% end %>
 </div>
 
-<%= link("New Project", to: project_path(@conn, :new), class: "hollow button") %>
+<div class="projects-index-footer">
+  <%= link("New Project", to: project_path(@conn, :new), class: "hollow button") %>
+</div>

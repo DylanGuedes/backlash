@@ -1,0 +1,3 @@
+<div class="sidebar-desktop">
+  <%= link("PROJECTS", to: project_path(@conn, :index)) %>
+</div>

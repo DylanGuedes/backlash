@@ -1,0 +1,31 @@
+.project-footer ul {
+  background-color: #4c2a85;
+  color: white;
+  padding: 2px 0px;
+  border-radius: 4px;
+}
+
+.project-footer ul li {
+  margin: 0 2px;
+  padding: 3px 7px;
+  border-radius: 2px;
+}
+
+.project-footer ul li .item .icon-text {
+  margin-left: 5px;
+  font-weight: 600;
+  font-family: Montserrat;
+}
+
+.project-footer ul li:hover {
+  background: #320e3b;
+}
+
+.project-footer .popover {
+  color: black;
+  font-family: Cantarell;
+}
+
+.project {
+  margin-bottom: 40px;
+}
