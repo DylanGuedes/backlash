@@ -16,7 +16,7 @@
         </a>
 
         <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Setups related to this project. Setups are guides and scripts that solve this project setup to a given platform." data-original-title title class="btn btn-info">
-          <i class="fa fa-terminal" aria-hidden="true"> <span class="icon-text">540</span></i>
+          <i class="fa fa-code" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.total_scripts(@project) %></span></i>
         </a>
 
         <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Edit this project." data-original-title title class="btn btn-info" href="/projects/<%= @project.id %>/edit">

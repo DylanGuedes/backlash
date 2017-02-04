@@ -1,19 +1,21 @@
-<h1>Targets</h1>
+<div class="target-index">
+  <h1>Targets</h1>
 
-<div class="row">
-  <%= for target <- @targets do %>
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <%= if target.image do %>
-          <img src="<%= Backlash.ImageUploader.url({target.image.file_name, target.image}) %>"/>
-        <% end %>
-        <div class="caption">
-          <h4><%= link(target.name, to: target_path(@conn, :show, target.id)) %></h4>
-          <p><%= target.description %></p>
+  <div class="target-list">
+    <%= for target <- @targets do %>
+      <div class="row target">
+        <div class="col-xs-4 col-md-2">
+          <%= if target.image do %>
+            <img src="<%= Backlash.ImageUploader.url({target.image.file_name, target.image}) %>" class="target-logo" />
+          <% end %>
+        </div>
+
+        <div class="col-md-10 col-xs-8">
+          <h2><%= link(target.name, to: target_path(@conn, :show, target.id)) %></h2>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 
-<%= link("New Target", to: target_path(@conn, :new), class: "hollow button") %>
+  <%= link("New Target", to: target_path(@conn, :new), class: "hollow button") %>
+</div>

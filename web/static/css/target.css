@@ -1,0 +1,14 @@
+.target-index .target-list .thumbnail {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.target-index .target-logo {
+  max-height: 150px;
+  max-width: 150px;
+}
+
+.target-index .target {
+  margin-bottom: 40px;
+}
+

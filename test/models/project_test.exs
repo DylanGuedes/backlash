@@ -64,4 +64,9 @@ defmodule Backlash.ProjectTest do
     project = Repo.get(Project, project.id) |> Repo.preload(:setups)
     assert project.setups==[setup, setup2]
   end
+
+  test "total_setups should count correctly how many setups the project have" do
+    project = insert(:project)
+    setup = insert(:setup)
+  end
 end

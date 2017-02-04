@@ -30,12 +30,14 @@
           <h4><%= link(proj.name, to: project_path(@conn, :show, proj.id)) %></h4>
         </div>
         <div class="btn-group">
-          <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="<%= Backlash.StringHelper.truncate(proj.description, 120) %>" data-original-title title class="btn btn-info" href="/projects/<%= proj.id %>">
-            <i class="fa fa-info" aria-hidden="true"><span class="icon-text"></span></i>
-          </a>
+          <%= if proj.description do %>
+            <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="<%= Backlash.StringHelper.truncate(proj.description, 120) %>" data-original-title title class="btn btn-info" href="/projects/<%= proj.id %>">
+              <i class="fa fa-info" aria-hidden="true"><span class="icon-text"></span></i>
+            </a>
+          <% end %>
 
           <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="De-relate the project with this script. The script will not more be related with it." data-original-title title class="btn btn-danger" href="/setups/<%= @setup.id %>/derelate/<%= proj.id %>">
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <i class="fa fa-unlink" aria-hidden="true"></i>
           </a>
         </div>
       </div>
