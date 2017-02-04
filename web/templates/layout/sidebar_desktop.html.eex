@@ -1,3 +1,49 @@
 <div class="sidebar-desktop">
-  <%= link("PROJECTS", to: project_path(@conn, :index)) %>
+  <div class="section">
+    <div class="item section-title">
+      <%= link("Projects", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("My Projects", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("Statistics", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("Ranking", to: project_path(@conn, :index)) %>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="item section-title">
+      <%= link("Setups", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("My Setups", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("Statistics", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("Guides", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("New Setup", to: project_path(@conn, :index)) %>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="item section-title">
+      <%= link("Targets", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("My Targets", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("Statistics", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("Ranking", to: project_path(@conn, :index)) %>
+    </div>
+  </div>
 </div>

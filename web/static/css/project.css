@@ -1,31 +1,30 @@
-.project-footer ul {
-  background-color: #4c2a85;
-  color: white;
-  padding: 2px 0px;
-  border-radius: 4px;
-}
-
-.project-footer ul li {
-  margin: 0 2px;
-  padding: 3px 7px;
-  border-radius: 2px;
-}
-
-.project-footer ul li .item .icon-text {
-  margin-left: 5px;
-  font-weight: 600;
-  font-family: Montserrat;
-}
-
-.project-footer ul li:hover {
-  background: #320e3b;
-}
-
 .project-footer .popover {
   color: black;
   font-family: Cantarell;
 }
 
+.project-footer a span.icon-text {
+  font-family: Cantarell;
+}
+
 .project {
   margin-bottom: 40px;
+}
+
+.thumbnail .project-logo {
+  max-width: 120px;
+  min-width: 120px;
+  max-height: 120px;
+  min-height: 120px;
+}
+
+.thumbnail .target-logo {
+  max-width: 150px;
+  min-width: 150px;
+  max-height: 150px;
+  min-height: 150px;
+}
+
+.popover {
+  width: 250%;
 }

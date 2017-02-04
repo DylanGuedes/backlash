@@ -1,0 +1,33 @@
+.sidebar-desktop {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.sidebar-desktop .item {
+  flex: 1;
+  padding: 10px;
+}
+
+.sidebar-desktop .item.section-title {
+  background-color: #13073a;
+}
+
+.sidebar-desktop .item.section-title a {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.sidebar-desktop .section {
+  border: 1px solid #13073a;
+}
+
+.sidebar-desktop .item.section-item a {
+  color: #13073a;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.sidebar-desktop .section {
+  margin-bottom: 20px;
+}

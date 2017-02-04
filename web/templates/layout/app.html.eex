@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Backlash!</title>
+    <title>Backlash - Providers of half decent scripts</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -18,15 +18,13 @@
     <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
     <p class="alert alert-success" role="alert"><%= get_flash(@conn, :success) %></p>
 
-    <main role="main">
-      <div class="row-fluid">
-        <div class="col-md-3 col-xs-0">
-          <%= render "sidebar_desktop.html", conn: @conn %>
-        </div>
+    <main role="main" class="main-body">
+      <div class="sidebar">
+        <%= render "sidebar_desktop.html", conn: @conn %>
+      </div>
 
-        <div class="col-md-9 col-xs-12 main-content">
-          <%= render @view_module, @view_template, assigns %>
-        </div>
+      <div class="main-content">
+        <%= render @view_module, @view_template, assigns %>
       </div>
     </main>
 

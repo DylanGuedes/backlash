@@ -3,30 +3,41 @@
 @import "font-awesome";
 @import "header";
 @import "project";
+@import "sidebar";
 
 body {
-  font-family: Cantarell;
+  font-family: "Montserrat";
   margin: 0;
   background-color: rgba(183, 183, 183, 0.14);
 }
 
+.main-body {
+  display: flex;
+}
+
+.sidebar {
+  flex: 1;
+}
+
+.main-content {
+  flex: 3;
+}
+
 .navbar-default {
   border: none;
-  background-color: #13073a;
   border-radius: 0px;
   padding: 20px 10px;
 }
 
 .nav.navbar-nav li a {
-  color: white;
-  font-weight: 900;
+  color: #13073a;
+  letter-spacing: 2px;
   font-size: 21px;
-  transition: border-bottom 0.2s ease-in-out;
+  transition: font-weight 0.2s ease-in-out;
 }
 
 .nav.navbar-nav li a:hover {
-  color: white;
-  border-bottom: 9px solid white;
+  font-weight: 900;
 }
 
 span.label.label-default a {
@@ -80,11 +91,13 @@ h1 {
   font-size: 16px;
   font-family: "Montserrat";
   text-transform: uppercase;
+  padding-bottom: 5%;
+  margin-top: 0px;
+  color: #13073a;
 }
 
-.projects-index-header {
-  padding-top: 5%;
-  padding-bottom: 5%;
+table.table thead tr th {
+  color: #13073a;
 }
 
 .project-logo {
@@ -98,6 +111,7 @@ h1 {
 
 h2 {
   font-size: 36px;
+  color: #13073a;
 }
 
 @media(min-width: 50em) {
@@ -152,4 +166,8 @@ h2 {
 
 .project-body {
   margin-bottom: 40px;
+}
+
+.popover .popover-content {
+  width: 100%;
 }

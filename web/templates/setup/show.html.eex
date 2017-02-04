@@ -17,21 +17,26 @@
 
 <%= link("Edit this setup", to: setup_path(@conn, :edit, @setup.id)) %>
 
-<h1>Related Projects</h1>
+<h2>Related Projects</h2>
 
 <div class="row">
   <%= for proj <- @setup.projects do %>
-    <div class="col-sm-6 col-md-4">
+    <div class="col-sm-6 col-md-2">
       <div class="thumbnail">
         <%= if proj.image do %>
-          <img src="<%= Backlash.ImageUploader.url({proj.image.file_name, proj.image}) %>"/>
+          <img src="<%= Backlash.ImageUploader.url({proj.image.file_name, proj.image}) %>" class="project-logo"/>
         <% end %>
         <div class="caption">
           <h4><%= link(proj.name, to: project_path(@conn, :show, proj.id)) %></h4>
         </div>
         <div class="btn-group">
-          <%= link("About", to: project_path(@conn, :show, proj.id), class: "btn btn-info") %>
-          <%= link("De-relate", to: setup_path(@conn, :derelate, @setup.id, proj.id), method: :post, class: "btn btn-danger") %>
+          <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="<%= Backlash.StringHelper.truncate(proj.description, 120) %>" data-original-title title class="btn btn-info" href="/projects/<%= proj.id %>">
+            <i class="fa fa-info" aria-hidden="true"><span class="icon-text"></span></i>
+          </a>
+
+          <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="De-relate the project with this script. The script will not more be related with it." data-original-title title class="btn btn-danger" href="/setups/<%= @setup.id %>/derelate/<%= proj.id %>">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
     </div>
