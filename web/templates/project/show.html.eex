@@ -1,7 +1,7 @@
 <div class="project-show">
   <h1><%= @project.name %> Home</h1>
 
-  <%= render "project.html", project: @project, conn: @conn %>
+  <%= render "project.html", project: @project, conn: @conn, current_user: @current_user %>
 
   <h2>Setups for this project</h2>
   <div class="row">

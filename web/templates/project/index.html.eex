@@ -4,7 +4,7 @@
 
 <div class="projects-index-body">
   <%= for project <- @projects do %>
-    <%= render "project.html", project: project, conn: @conn %>
+    <%= render "project.html", project: project, conn: @conn, current_user: @current_user %>
   <% end %>
 </div>
 

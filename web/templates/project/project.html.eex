@@ -19,13 +19,15 @@
           <i class="fa fa-code" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.total_setups(@project.id) %></span></i>
         </a>
 
-        <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Edit this project." data-original-title title class="btn btn-info" href="/projects/<%= @project.id %>/edit">
-          <i class="fa fa-edit" aria-hidden="true"> <span class="icon-text">Edit</span></i>
-        </a>
+        <%= if @current_user && @project.author_id == @current_user.id do %>
+          <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Edit this project." data-original-title title class="btn btn-info" href="/projects/<%= @project.id %>/edit">
+            <i class="fa fa-edit" aria-hidden="true"> <span class="icon-text">Edit</span></i>
+          </a>
 
-        <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Destroy this project." data-original-title title class="btn btn-danger" href="/projects/<%= @project.id %>/edit">
-          <i class="fa fa-trash-o" aria-hidden="true"> <span class="icon-text">Delete</span></i>
-        </a>
+          <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Destroy this project." data-original-title title class="btn btn-danger" href="/projects/<%= @project.id %>/edit">
+            <i class="fa fa-trash-o" aria-hidden="true"> <span class="icon-text">Delete</span></i>
+          </a>
+        <% end %>
       </div>
     </div>
   </div>

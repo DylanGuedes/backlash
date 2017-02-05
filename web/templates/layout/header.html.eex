@@ -5,7 +5,7 @@
   -->
 
   <nav class="navbar navbar-default">
-    <div class="container-fluid container">
+    <div class="container-fluid">
       <ul class="nav navbar-nav">
         <li><%= link("PROJECTS", to: project_path(@conn, :index)) %></li>
         <li><%= link("SETUPS", to: setup_path(@conn, :index)) %></li>
