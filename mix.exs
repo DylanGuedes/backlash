@@ -19,7 +19,7 @@ defmodule Backlash.Mixfile do
   def application do
     [mod: {Backlash, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :arc_ecto]]
+                    :phoenix_ecto, :postgrex, :arc_ecto, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,7 +43,8 @@ defmodule Backlash.Mixfile do
      {:dialyxir, "~> 0.4", only: [:dev], runtime: false},
      {:credo, "~> 0.3", only: [:dev, :test]},
      {:ex_machina, "~> 1.0"},
-     {:earmark, "~> 1.0"}
+     {:earmark, "~> 1.0"},
+     {:comeonin, "~> 2.1"}
    ]
   end
 

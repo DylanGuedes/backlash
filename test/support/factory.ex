@@ -5,6 +5,7 @@ defmodule Backlash.Factory do
   alias Backlash.Repo
   alias Backlash.Target
   alias Backlash.Setup
+  alias Backlash.User
 
   def project_factory do
     %Project{
@@ -21,6 +22,14 @@ defmodule Backlash.Factory do
   def setup_factory do
     %Setup{
       name: "Noosfero-for-fedora25",
+    }
+  end
+
+  def user_factory do
+    %User {
+      username: "niceuser123",
+      password: "nicepass123",
+      email: "bestuser@server.com"
     }
   end
 end

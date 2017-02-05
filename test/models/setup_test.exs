@@ -10,7 +10,6 @@ defmodule Backlash.SetupTest do
   alias Backlash.ProjectSetup
 
   @valid_attrs %{name: "some content"}
-  @invalid_attrs %{}
 
   test "changeset with valid attributes" do
     insert(:project)

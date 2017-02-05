@@ -46,4 +46,19 @@
       <%= link("Ranking", to: project_path(@conn, :index)) %>
     </div>
   </div>
+
+  <div class="section">
+    <div class="item section-title">
+      <%= link("Users", to: user_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("My Profile", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("Edit Info", to: project_path(@conn, :index)) %>
+    </div>
+    <div class="item section-item">
+      <%= link("Statistics", to: project_path(@conn, :index)) %>
+    </div>
+  </div>
 </div>

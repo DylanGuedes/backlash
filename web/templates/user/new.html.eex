@@ -1,0 +1,35 @@
+<h1>Signup</h1>
+
+<%= form_for @changeset, user_path(@conn, :create), fn f -> %>
+  <%= if f.errors != [] do %>
+    <div class="alert alert-danger">
+      <p>Wrong data! :(</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label>User name</label>
+    <%= text_input f, :username, class: "form-control" %>
+    <%= error_tag f, :username %>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <%= password_input f, :password, class: "form-control" %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div class="form-group">
+    <label>Password Confirmation</label>
+    <%= password_input f, :password_confirmation, class: "form-control" %>
+    <%= error_tag f, :password_confirmation %>
+  </div>
+
+  <%= submit "Create Project", class: "btn btn-primary" %>
+<% end %>

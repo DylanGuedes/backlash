@@ -20,6 +20,7 @@ defmodule Backlash.Router do
     resources "/projects", ProjectController
     resources "/setups", SetupController
     resources "/targets", TargetController
+    resources "/users", UserController
 
     get "/setups/:id/derelate/:project_id", SetupController, :derelate
   end
