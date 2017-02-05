@@ -1,14 +1,14 @@
 defmodule Backlash.SessionController do
   use Backlash.Web, :controller
 
-  alias Backlash.User
+  alias Backlash.Auth
 
   def new(conn, _params) do
     render(conn, "new.html")
   end
 
   def create(conn, %{"session" => %{"username" => username, "password" => password}}) do
-    case Backlash.Auth.login_by_username_and_pass(conn, username, password, repo: Repo) do
+    case Auth.login_by_username_and_pass(conn, username, password, repo: Repo) do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "Welcome back")
@@ -22,7 +22,7 @@ defmodule Backlash.SessionController do
 
   def delete(conn, _) do
     conn
-    |> Backlash.Auth.logout()
+    |> Auth.logout()
     |> redirect(to: page_path(conn, :index))
   end
 end

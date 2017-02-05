@@ -4,9 +4,7 @@ defmodule Backlash.SetupTest do
   import Backlash.Factory
 
   alias Backlash.Setup
-  alias Backlash.Project
   alias Backlash.Repo
-  alias Backlash.Target
   alias Backlash.ProjectSetup
 
   @valid_attrs %{name: "some content"}
@@ -54,7 +52,7 @@ defmodule Backlash.SetupTest do
     project2 = insert(:project, params_for(:project, %{name: "anotherone2"}))
     Repo.insert ProjectSetup.relate(project1.id, setup.id)
     Repo.insert ProjectSetup.relate(project2.id, setup.id)
-    project3 = insert(:project, params_for(:project, %{name: "anotherone3"}))
+    insert(:project, params_for(:project, %{name: "anotherone3"}))
 
     setup = Repo.get(Setup, setup.id) |> Repo.preload(:projects)
     assert Repo.all(Setup.used_projects(setup))==setup.projects

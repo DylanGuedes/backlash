@@ -15,7 +15,7 @@ defmodule Backlash.ProjectController do
         changeset = Project.changeset(project, %{})
         render(conn, "edit.html", %{changeset: changeset, project: project})
       _ ->
-        redirect conn, to: Router.Helpers.page_path(conn, :show, "unauthorized")
+        redirect conn, to: Backlash.Router.Helpers.page_path(conn, :show, "unauthorized")
     end
   end
 

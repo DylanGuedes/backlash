@@ -22,6 +22,7 @@ defmodule Backlash.Router do
     resources "/setups", SetupController
     resources "/targets", TargetController
     resources "/users", UserController
+
     resources "/sessions", SessionController, only: [:create]
 
     get "/signout", SessionController, :delete

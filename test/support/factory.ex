@@ -2,7 +2,6 @@ defmodule Backlash.Factory do
   use ExMachina.Ecto, repo: Backlash.Repo
 
   alias Backlash.Project
-  alias Backlash.Repo
   alias Backlash.Target
   alias Backlash.Setup
   alias Backlash.User
@@ -30,7 +29,8 @@ defmodule Backlash.Factory do
       username: "niceuser123",
       password: "nicepass123",
       password_confirmation: "nicepass123",
-      email: "bestuser@server.com"
+      email: "bestuser@server.com",
+      password_hash: Comeonin.Bcrypt.hashpwsalt("nicepass123")
     }
   end
 end

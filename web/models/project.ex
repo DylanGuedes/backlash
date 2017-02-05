@@ -64,9 +64,9 @@ defmodule Backlash.Project do
     Repo.insert(changeset)
   end
 
-  @spec total_scripts(t) :: number
-  def total_scripts(project) do
-    q = from p in ProjectSetup, where: p.project_id==^project.id, select: count(p.setup_id)
+  @spec total_setups(integer) :: number
+  def total_setups(project_id) do
+    q = from p in ProjectSetup, where: p.project_id==^project_id, select: count(p.setup_id)
     Repo.one q
   end
 end

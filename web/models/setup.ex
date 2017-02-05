@@ -19,7 +19,6 @@ defmodule Backlash.Setup do
 
   alias Backlash.Repo
   alias Backlash.Setup
-  alias Backlash.Target
   alias Backlash.ProjectSetup
   alias Backlash.Project
 
