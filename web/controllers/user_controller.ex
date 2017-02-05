@@ -2,8 +2,9 @@ defmodule Backlash.UserController do
   use Backlash.Web, :controller
 
   alias Backlash.User
+  alias Backlash.Warden
 
-  plug :authenticate when action in [:index, :show]
+  plug Warden when action in [:index, :edit, :update]
 
   def index(conn, _params) do
     users = Repo.all User
@@ -34,14 +35,46 @@ defmodule Backlash.UserController do
     render(conn, "show.html", user: user)
   end
 
-  defp authenticate(conn, _) do
-    if conn.assigns.current_user do
-      conn
-    else
+  def edit(conn, %{"id" => id}) do
+    id = String.to_integer(id)
+    if id != conn.assigns[:current_user].id do
       conn
       |> put_flash(:error, "You must be logged in to access that page")
       |> redirect(to: page_path(conn, :index))
       |> halt()
+    else
+      case Repo.get(User, id) do
+        user when is_map(user) ->
+          changeset = User.changeset(user, %{})
+        render(conn, "edit.html", %{changeset: changeset, user: user})
+        _ ->
+          redirect(conn, to: page_path(conn, :show, "invalid user"))
+      end
+    end
+  end
+
+  def update(conn, %{"id" => id, "user" => user_params}) do
+    id_as_int = String.to_integer(id)
+    if id_as_int != conn.assigns[:current_user].id do
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    else
+      user = Repo.get(User, id)
+      changeset = User.changeset(user, user_params)
+
+      case Repo.update(changeset) do
+        {:ok, user} ->
+          conn
+          |> put_flash(:info, "User updated!")
+          |> show(%{"id" => user.id})
+
+        {:error, _} ->
+          conn
+          |> put_flash(:error, "Invalid attributes!")
+          |> edit(%{"id" => id})
+      end
     end
   end
 end

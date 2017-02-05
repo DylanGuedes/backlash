@@ -80,7 +80,6 @@ defmodule Backlash.SetupController do
       {:ok, setup} ->
         for proj_id <- params["projects_ids"] do
           proj_setup = ProjectSetup.relate(proj_id, setup.id)
-          IO.puts proj_id
           {:ok, _} = Repo.insert(proj_setup)
         end
 

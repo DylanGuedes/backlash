@@ -56,5 +56,4 @@ defmodule Backlash.ProjectController do
         |> edit(changeset: changeset)
     end
   end
-
 end

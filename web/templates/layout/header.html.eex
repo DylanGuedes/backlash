@@ -11,6 +11,7 @@
         <li><%= link("SETUPS", to: setup_path(@conn, :index)) %></li>
         <li><%= link("TARGETS", to: target_path(@conn, :index)) %></li>
         <%= if @current_user do %>
+          <li><%= link("EDIT PROFILE", to: user_path(@conn, :edit, @current_user.id)) %></li>
           <li><%= link "SIGNOUT", to: session_path(@conn, :delete) %></li>
         <% else %>
           <li><%= link("SIGNUP", to: user_path(@conn, :new)) %></li>
