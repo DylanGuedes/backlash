@@ -6,12 +6,14 @@ defmodule Backlash.ProjectTest do
   alias Backlash.Project
   alias Backlash.Setup
   alias Backlash.Repo
+  alias Backlash.User
 
   @invalid1 %{name: "a", description: ""}
   @invalid2 %{name: String.duplicate("A", 121), description: "its nice rly"}
 
   test "should work for valid attrs" do
-    changeset = Project.changeset(%Project{}, params_for(:project))
+    user = insert(:user)
+    changeset = Project.changeset(Ecto.build_assoc(user, :created_projects, params_for(:project)), %{})
     assert changeset.valid?
   end
 

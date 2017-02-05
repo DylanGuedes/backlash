@@ -11,7 +11,12 @@ defmodule Backlash.User do
       * username: :string
 
   """
+
   use Backlash.Web, :model
+
+  alias Backlash.User
+  alias Backlash.Project
+  alias Backlash.Repo
 
   @typedoc """
   User struct
@@ -28,6 +33,8 @@ defmodule Backlash.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :password_hash, :string
+
+    has_many :created_projects, Project
 
     timestamps()
   end
@@ -67,5 +74,10 @@ defmodule Backlash.User do
       _ ->
         changeset
     end
+  end
+
+  def total_projects_created(user_id) do
+    q = from p in Project, where: p.author_id==^user_id, select: count(p.id)
+    Repo.one q
   end
 end

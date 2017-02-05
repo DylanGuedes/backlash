@@ -3,6 +3,9 @@ defmodule Backlash.ProjectController do
 
   alias Backlash.Project
   alias Backlash.Repo
+  alias Backlash.Warden
+
+  plug Warden when action in [:new, :update, :edit, :create]
 
   def index(conn, _params) do
     projects = Repo.all(Project)
@@ -30,7 +33,10 @@ defmodule Backlash.ProjectController do
   end
 
   def create(conn, %{"project" => project_params}) do
-    changeset = Project.changeset(%Project{}, project_params)
+    user = conn.assigns[:current_user]
+    opts = Map.put(project_params, "author_id", user.id)
+    changeset = Project.changeset(%Project{}, opts)
+
     case Repo.insert(changeset) do
       {:ok, project} ->
         show(conn, %{"id" => project.id})

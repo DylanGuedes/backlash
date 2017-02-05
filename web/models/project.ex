@@ -24,6 +24,7 @@ defmodule Backlash.Project do
   alias Backlash.Repo
   alias Backlash.Setup
   alias Backlash.ProjectSetup
+  alias Backlash.User
 
   @typedoc """
   Project struct
@@ -42,6 +43,7 @@ defmodule Backlash.Project do
     field :image, Backlash.ImageUploader.Type
 
     many_to_many :setups, Backlash.Setup, join_through: ProjectSetup
+    belongs_to :author, User
 
     timestamps()
   end
@@ -49,8 +51,9 @@ defmodule Backlash.Project do
   @spec changeset(t, map) :: t
   def changeset(struct, params \\ :empty) do
     struct
-    |> cast(params, [:name, :description])
+    |> cast(params, [:name, :description, :author_id])
     |> validate_required([:name])
+    |> assoc_constraint(:author)
     |> unique_constraint(:name)
     |> validate_length(:name, [min: 3, max: 120])
     |> validate_length(:description, [max: 2000])
