@@ -7,6 +7,7 @@ defmodule Backlash.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Backlash.Auth, repo: Backlash.Repo
   end
 
   pipeline :api do
@@ -21,6 +22,11 @@ defmodule Backlash.Router do
     resources "/setups", SetupController
     resources "/targets", TargetController
     resources "/users", UserController
+    resources "/sessions", SessionController, only: [:create]
+
+    get "/signout", SessionController, :delete
+    get "/signin", SessionController, :new
+    get "/signup", UserController, :new
 
     get "/setups/:id/derelate/:project_id", SetupController, :derelate
   end

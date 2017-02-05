@@ -29,6 +29,7 @@ defmodule Backlash.Factory do
     %User {
       username: "niceuser123",
       password: "nicepass123",
+      password_confirmation: "nicepass123",
       email: "bestuser@server.com"
     }
   end

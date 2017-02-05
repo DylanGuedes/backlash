@@ -8,7 +8,7 @@ defmodule Backlash.UserControllerTest do
 
   test "GET /users should work", %{conn: conn} do
     us = insert(:user)
-    conn = get conn, "/users"
+    conn = assign(build_conn(), :current_user, us) |> get("/users")
     assert html_response(conn, 200) =~ us.username
   end
 
@@ -37,9 +37,19 @@ defmodule Backlash.UserControllerTest do
     assert l2==(l1+0)
   end
 
-  test "GET /users/id should work", %{conn: conn} do
+  test "GET /users/id should work while logged in", %{conn: conn} do
     us = insert(:user)
-    conn = get conn, user_path(conn, :show, us.id)
+    conn =
+      assign(build_conn(), :current_user, us)
+      |> get(user_path(conn, :show, us.id))
+
     assert html_response(conn, 200) =~ us.username
+  end
+
+  test "GET /users/id should redirect if not logged in", %{conn: conn} do
+    us = insert(:user)
+    conn = get(conn, user_path(conn, :show, us.id))
+    assert html_response(conn, 302)
+    IO.inspect conn.request_path
   end
 end

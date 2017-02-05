@@ -39,7 +39,8 @@ defmodule Backlash.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_backlash_key",
-    signing_salt: "f5deJS3N"
+    signing_salt: "f5deJS3N",
+    max_age: 86400
 
   plug Backlash.Router
 end

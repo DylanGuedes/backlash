@@ -10,7 +10,12 @@
         <li><%= link("PROJECTS", to: project_path(@conn, :index)) %></li>
         <li><%= link("SETUPS", to: setup_path(@conn, :index)) %></li>
         <li><%= link("TARGETS", to: target_path(@conn, :index)) %></li>
-        <li><%= link("SIGNUP", to: user_path(@conn, :new)) %></li>
+        <%= if @current_user do %>
+          <li><%= link "SIGNOUT", to: session_path(@conn, :delete) %></li>
+        <% else %>
+          <li><%= link("SIGNUP", to: user_path(@conn, :new)) %></li>
+          <li><%= link("SIGNIN", to: session_path(@conn, :new)) %></li>
+        <% end %>
       </ul>
     </div>
   </nav>
