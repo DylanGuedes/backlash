@@ -19,6 +19,8 @@ defmodule Backlash.Router do
 
     get "/", PageController, :index
     get "/users/statistics", UserController, :statistics
+    get "/projects/ranking", ProjectController, :ranking
+
     resources "/projects", ProjectController
     resources "/setups", SetupController
     resources "/targets", TargetController

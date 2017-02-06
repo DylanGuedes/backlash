@@ -3,6 +3,7 @@ defmodule Backlash.UserController do
 
   alias Backlash.User
   alias Backlash.Warden
+  alias Backlash.UserStatistics
 
   plug Warden when action in [:index, :edit, :update]
 
@@ -77,6 +78,6 @@ defmodule Backlash.UserController do
   end
 
   def statistics(conn, _) do
-    render(conn, "statistics.html", statistics: [])
+    render(conn, "statistics.html", statistics: UserStatistics.statistics)
   end
 end

@@ -92,4 +92,10 @@ defmodule Backlash.ProjectController do
     project = Repo.one query
     render(conn, "setups.html", project: project)
   end
+
+  def ranking(conn, _) do
+    q = from p in Project
+    projects = Repo.all(q) |> Enum.with_index
+    render(conn, "ranking.html", projects: projects)
+  end
 end

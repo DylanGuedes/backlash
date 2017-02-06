@@ -1,4 +1,7 @@
 <h1>Statistics</h1>
 
-<%= for data <- @statistics do %>
+<%= for {k, v} <- @statistics do %>
+  <h2>
+    <%= k %>: <%= v %>
+  </h2>
 <% end %>

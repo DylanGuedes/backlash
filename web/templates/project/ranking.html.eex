@@ -1,0 +1,12 @@
+<h1>Projects ranking</h1>
+
+<%= for {project, idx} <- @projects do %>
+  <div class="row projects-ranking item">
+    <h2 style="font-size: <%= 50-2*idx %>px; opacity: <%= 1-(idx*0.1) %>;">
+      <%= idx+1 %>. <%= link(project.name, to: project_path(@conn, :show, project.id)) %>
+      <span style="font-size: 21px;">
+        <%= Backlash.Project.stars(project) %> star(s).
+      </span>
+    </h2>
+  </div>
+<% end %>
