@@ -25,6 +25,8 @@ defmodule Backlash.Project do
   alias Backlash.Setup
   alias Backlash.ProjectSetup
   alias Backlash.User
+  alias Backlash.Project
+  alias Backlash.Reputation
 
   @typedoc """
   Project struct
@@ -43,6 +45,7 @@ defmodule Backlash.Project do
     field :image, Backlash.ImageUploader.Type
 
     many_to_many :setups, Backlash.Setup, join_through: ProjectSetup
+    has_many :reputations, Reputation
     belongs_to :author, User
 
     timestamps()
@@ -70,6 +73,27 @@ defmodule Backlash.Project do
   @spec total_setups(integer) :: number
   def total_setups(project_id) do
     q = from p in ProjectSetup, where: p.project_id==^project_id, select: count(p.setup_id)
+    Repo.one q
+  end
+
+  @spec can_edit?(t, User.t) :: boolean
+  def can_edit?(%Project{author_id: id}, %User{id: id}),
+    do: true
+  def can_edit?(project, %User{admin: true}),
+    do: true
+  def can_edit?(project, user),
+    do: false
+
+  @spec can_delete?(t, User.t) :: boolean
+  def can_delete?(%Project{author_id: id}, %User{id: id}),
+    do: true
+  def can_delete?(project, %User{admin: true}),
+    do: true
+  def can_delete?(project, user),
+    do: false
+
+  def stars(project) do
+    q = from p in Reputation, where: p.project_id==^project.id, select: count(p.id)
     Repo.one q
   end
 end

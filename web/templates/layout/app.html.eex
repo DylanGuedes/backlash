@@ -20,7 +20,7 @@
 
     <main role="main" class="main-body">
       <div class="sidebar">
-        <%= render "sidebar_desktop.html", conn: @conn %>
+        <%= render "sidebar_desktop.html", conn: @conn, current_user: @current_user %>
       </div>
 
       <div class="main-content">

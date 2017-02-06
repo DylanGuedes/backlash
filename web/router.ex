@@ -18,12 +18,13 @@ defmodule Backlash.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/users/statistics", UserController, :statistics
     resources "/projects", ProjectController
     resources "/setups", SetupController
     resources "/targets", TargetController
     resources "/users", UserController
-
     resources "/sessions", SessionController, only: [:create]
+    resources "/admin", AdminController, only: [:index]
 
     get "/signout", SessionController, :delete
     get "/signin", SessionController, :new

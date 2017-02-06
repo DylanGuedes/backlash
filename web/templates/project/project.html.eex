@@ -12,18 +12,20 @@
     <div class="project-footer">
       <div class="btn-group" role="group">
         <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Stars of this project. Stars are given by users, and express how much they liked this project." class="btn btn-info">
-          <i class="fa fa-star" aria-hidden="true"> <span class="icon-text">540</span></i>
+          <i class="fa fa-star" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.stars @project %></span></i>
         </a>
 
         <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Setups related to this project. Setups are guides and scripts that solve this project setup to a given platform." data-original-title title class="btn btn-info">
           <i class="fa fa-code" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.total_setups(@project.id) %></span></i>
         </a>
 
-        <%= if @current_user && @project.author_id == @current_user.id do %>
+        <%= if @current_user && Backlash.Project.can_edit?(@project, @current_user) do %>
           <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Edit this project." data-original-title title class="btn btn-info" href="/projects/<%= @project.id %>/edit">
             <i class="fa fa-edit" aria-hidden="true"> <span class="icon-text">Edit</span></i>
           </a>
+        <% end %>
 
+        <%= if @current_user && Backlash.Project.can_delete?(@project, @current_user) do %>
           <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Destroy this project." data-original-title title class="btn btn-danger" href="/projects/<%= @project.id %>/edit">
             <i class="fa fa-trash-o" aria-hidden="true"> <span class="icon-text">Delete</span></i>
           </a>

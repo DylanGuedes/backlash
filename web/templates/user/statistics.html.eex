@@ -1,0 +1,4 @@
+<h1>Statistics</h1>
+
+<%= for data <- @statistics do %>
+<% end %>

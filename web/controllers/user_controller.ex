@@ -75,4 +75,8 @@ defmodule Backlash.UserController do
       end
     end
   end
+
+  def statistics(conn, _) do
+    render(conn, "statistics.html", statistics: [])
+  end
 end

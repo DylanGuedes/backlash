@@ -51,14 +51,16 @@
     <div class="item section-title">
       <%= link("Users", to: user_path(@conn, :index)) %>
     </div>
+    <%= if @current_user do %>
+      <div class="item section-item">
+        <%= link("My Profile", to: user_path(@conn, :show, @current_user.id)) %>
+      </div>
+      <div class="item section-item">
+        <%= link("Edit Info", to: user_path(@conn, :edit, @current_user.id)) %>
+      </div>
+    <% end %>
     <div class="item section-item">
-      <%= link("My Profile", to: project_path(@conn, :index)) %>
-    </div>
-    <div class="item section-item">
-      <%= link("Edit Info", to: project_path(@conn, :index)) %>
-    </div>
-    <div class="item section-item">
-      <%= link("Statistics", to: project_path(@conn, :index)) %>
+      <%= link("Statistics", to: user_path(@conn, :statistics)) %>
     </div>
   </div>
 </div>

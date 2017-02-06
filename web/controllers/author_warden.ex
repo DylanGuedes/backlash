@@ -15,13 +15,17 @@ defmodule Backlash.AuthorWarden do
     handler = Keyword.fetch!(opts, :handler)
     entity = Repo.get(handler, id)
 
-    if conn.assigns.current_user.id == entity.author_id do
+    if conn.assigns.current_user.admin do
       conn
     else
-      conn
-      |> put_flash(:error, "You are not allowed to do it")
-      |> redirect(to: page_path(conn, :index))
-      |> halt()
+      if conn.assigns.current_user.id == entity.author_id do
+        conn
+      else
+        conn
+        |> put_flash(:error, "You are not allowed to do it")
+        |> redirect(to: page_path(conn, :index))
+        |> halt()
+      end
     end
   end
 end

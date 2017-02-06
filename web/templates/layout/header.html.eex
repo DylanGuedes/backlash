@@ -13,6 +13,9 @@
         <%= if @current_user do %>
           <li><%= link("EDIT PROFILE", to: user_path(@conn, :edit, @current_user.id)) %></li>
           <li><%= link "SIGNOUT", to: session_path(@conn, :delete) %></li>
+          <%= if @current_user.admin do %>
+            <li><%= link "ADMIN PANEL", to: admin_path(@conn, :index) %></li>
+          <% end %>
         <% else %>
           <li><%= link("SIGNUP", to: user_path(@conn, :new)) %></li>
           <li><%= link("SIGNIN", to: session_path(@conn, :new)) %></li>
