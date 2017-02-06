@@ -3,7 +3,6 @@ defmodule Backlash.User do
   * Entity that stores Users.
 
   ## Usage
-
       iex> Backlash.User.changeset(%Backlash.User, %{username: "A nice user"})
       nil
 
@@ -26,7 +25,6 @@ defmodule Backlash.User do
       * username
   """
   @type t :: %Backlash.User{}
-
 
   schema "users" do
     field :username, :string
@@ -54,7 +52,9 @@ defmodule Backlash.User do
       iex> Backlash.User.changeset(user, new_opts)
       %User{...}
       iex> # ^ edit_changeset used
+
   """
+
   @spec changeset(t, map) :: t
   def changeset(struct, params \\ %{}) do
     if struct.id do
@@ -107,4 +107,45 @@ defmodule Backlash.User do
     q = from p in Project, where: p.author_id==^user_id, select: count(p.id)
     Repo.one q
   end
+
+  @spec repute_project(number, number) :: tuple
+  def repute_project(user_id, project_id) do
+    Reputation.changeset(%Reputation{}, %{user_id: user_id, project_id: project_id})
+    |> Repo.insert
+  end
+
+  # obs: Im assuming that the user exist.
+  @spec can_repute?(number, number) :: boolean
+  def can_repute?(user_id, project_id) do
+    if reputed?(user_id, project_id) do
+      false
+    else
+      true
+    end
+  end
+
+  @spec reputed?(number, number) :: boolean
+  def reputed?(user_id, project_id) do
+    q = from p in Reputation, where: p.user_id==^user_id and p.project_id==^project_id, select: count(p.id)
+    case Repo.one(q) do
+      1 ->
+        true
+      0 ->
+        false
+      _ ->
+        false
+    end
+  end
+
+  @spec unrepute_project(number, number) :: tuple
+  def unrepute_project(user_id, project_id) do
+    q = from p in Reputation, where: p.user_id==^user_id and p.project_id==^project_id
+    {result, _} = Repo.delete_all q
+    if result>0 do
+      {:ok, result}
+    else
+      {:error, "Can't unrepute."}
+    end
+  end
+
 end

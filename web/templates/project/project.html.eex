@@ -11,9 +11,21 @@
 
     <div class="project-footer">
       <div class="btn-group" role="group">
-        <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Stars of this project. Stars are given by users, and express how much they liked this project." class="btn btn-info">
-          <i class="fa fa-star" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.stars @project %></span></i>
-        </a>
+        <%= if @current_user do %>
+          <%= if Backlash.User.can_repute?(@current_user.id, @project.id) do %>
+<a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Stars of this project. Stars are given by users, and express how much they liked this project." class="btn btn-default" href="/projects/<%= @project.id %>/repute" >
+              <i class="fa fa-star" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.stars @project %></span></i>
+            </a>
+          <% else %>
+            <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Stars of this project. Stars are given by users, and express how much they liked this project." class="btn btn-success" href="/projects/<%= @project.id %>/unrepute" >
+              <i class="fa fa-star" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.stars @project %></span></i>
+            </a>
+          <% end %>
+        <% else %>
+          <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Stars of this project. Stars are given by users, and express how much they liked this project." class="btn btn-info">
+            <i class="fa fa-star" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.stars @project %></span></i>
+          </a>
+        <% end %>
 
         <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Setups related to this project. Setups are guides and scripts that solve this project setup to a given platform." data-original-title title class="btn btn-info">
           <i class="fa fa-code" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.total_setups(@project.id) %></span></i>

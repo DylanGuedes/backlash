@@ -5,8 +5,9 @@ defmodule Backlash.ProjectController do
   alias Backlash.Repo
   alias Backlash.Warden
   alias Backlash.AuthorWarden
+  alias Backlash.User
 
-  plug Warden when action in [:new, :update, :edit, :create]
+  plug Warden when action in [:new, :update, :edit, :create, :repute, :unrepute]
   plug AuthorWarden, [handler: Project] when action in [:update, :edit]
 
   def index(conn, _params) do
@@ -62,6 +63,26 @@ defmodule Backlash.ProjectController do
         conn
         |> put_flash(:error, "Invalid attributes!")
         |> edit(changeset: changeset)
+    end
+  end
+
+  def repute(conn, %{"id" => id}) do
+    user = conn.assigns[:current_user]
+    if User.can_repute?(user.id, id) do
+      {:ok, _} = User.repute_project(user.id, id)
+      redirect(conn, to: project_path(conn, :index))
+    else
+      redirect(conn, to: project_path(conn, :index))
+    end
+  end
+
+  def unrepute(conn, %{"id" => id}) do
+    user = conn.assigns[:current_user]
+    if User.reputed?(user.id, id) do
+      {:ok, _} = User.unrepute_project(user.id, id)
+      redirect(conn, to: project_path(conn, :index))
+    else
+      redirect(conn, to: project_path(conn, :index))
     end
   end
 end

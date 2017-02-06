@@ -26,6 +26,9 @@ defmodule Backlash.Router do
     resources "/sessions", SessionController, only: [:create]
     resources "/admin", AdminController, only: [:index]
 
+    get "/projects/:id/repute", ProjectController, :repute
+    get "/projects/:id/unrepute", ProjectController, :unrepute
+
     get "/signout", SessionController, :delete
     get "/signin", SessionController, :new
     get "/signup", UserController, :new

@@ -92,6 +92,7 @@ defmodule Backlash.Project do
   def can_delete?(project, user),
     do: false
 
+  @spec stars(t) :: number
   def stars(project) do
     q = from p in Reputation, where: p.project_id==^project.id, select: count(p.id)
     Repo.one q
