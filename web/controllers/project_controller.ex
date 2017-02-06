@@ -11,7 +11,8 @@ defmodule Backlash.ProjectController do
   plug AuthorWarden, [handler: Project] when action in [:update, :edit]
 
   def index(conn, _params) do
-    projects = Repo.all(Project)
+    q = from p in Project, preload: :author
+    projects = Repo.all q
     render conn, "index.html", projects: projects
   end
 
@@ -31,7 +32,7 @@ defmodule Backlash.ProjectController do
     do: new(conn, changeset: Project.changeset(%Project{}, %{}))
 
   def show(conn, %{"id" => id}) do
-    project = Project |> Repo.get(id) |> Repo.preload([{:setups, :target}])
+    project = Project |> Repo.get(id) |> Repo.preload([{:setups, :target}, :author])
     render(conn, "show.html", project: project)
   end
 
@@ -84,5 +85,11 @@ defmodule Backlash.ProjectController do
     else
       redirect(conn, to: project_path(conn, :index))
     end
+  end
+
+  def setups(conn, %{"id" => id}) do
+    query = from p in Project, where: p.id==^id, preload: [{:setups, :target}, :author]
+    project = Repo.one query
+    render(conn, "setups.html", project: project)
   end
 end

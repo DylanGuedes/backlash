@@ -3,24 +3,5 @@
 
   <%= render "project.html", project: @project, conn: @conn, current_user: @current_user %>
 
-  <h2>Setups for this project</h2>
-  <div class="row">
-    <%= for stp <- @project.setups do %>
-      <div class="col-md-3 col-sm-6">
-        <div class="thumbnail">
-          <%= if stp.target && stp.target.image do %>
-            <img src="<%= Backlash.ImageUploader.url({stp.target.image.file_name, stp.target.image})%>" class="target-logo"/>
-          <% end %>
-
-          <div class="caption">
-            <%= if stp.target do %>
-              Setup for <%= stp.target.name %>
-            <% end %>
-            <%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <%= link("Add a setup for this project", to: (setup_path(@conn, :new, %{"project_id" => @project.id}))) %>
+  <%= render "setups_for_project.html", project: @project, conn: @conn %>
 </div>

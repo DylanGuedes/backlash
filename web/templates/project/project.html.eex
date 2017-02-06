@@ -27,7 +27,7 @@
           </a>
         <% end %>
 
-        <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Setups related to this project. Setups are guides and scripts that solve this project setup to a given platform." data-original-title title class="btn btn-info">
+        <a data-toggle="popover" data-trigger="hover" data-placement="right" data-animation="false" data-content="Setups related to this project. Setups are guides and scripts that solve this project setup to a given platform." data-original-title title class="btn btn-info" href="/projects/<%= @project.id %>/setups">
           <i class="fa fa-code" aria-hidden="true"> <span class="icon-text"><%= Backlash.Project.total_setups(@project.id) %></span></i>
         </a>
 
@@ -43,7 +43,10 @@
           </a>
         <% end %>
       </div>
+      <%= if @project.author do %>
+        <h4>Hosted by <%= link(@project.author.username, to: user_path(@conn, :show, @project.author.id)) %>
+      <% end %>
     </div>
   </div>
-
 </div>
+

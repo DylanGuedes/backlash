@@ -28,6 +28,7 @@ defmodule Backlash.Router do
 
     get "/projects/:id/repute", ProjectController, :repute
     get "/projects/:id/unrepute", ProjectController, :unrepute
+    get "/projects/:id/setups", ProjectController, :setups
 
     get "/signout", SessionController, :delete
     get "/signin", SessionController, :new

@@ -1,0 +1,3 @@
+<h1>Setups for <%= @project.name %></h1>
+
+<%= render "setups_for_project.html", project: @project, conn: @conn %>
