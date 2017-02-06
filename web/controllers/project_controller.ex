@@ -4,8 +4,10 @@ defmodule Backlash.ProjectController do
   alias Backlash.Project
   alias Backlash.Repo
   alias Backlash.Warden
+  alias Backlash.AuthorWarden
 
   plug Warden when action in [:new, :update, :edit, :create]
+  plug AuthorWarden, [handler: Project] when action in [:update, :edit]
 
   def index(conn, _params) do
     projects = Repo.all(Project)

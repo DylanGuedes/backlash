@@ -11,12 +11,10 @@ defmodule Backlash.UserController do
     render(conn, "index.html", users: users)
   end
 
-  def new(conn, changeset: changeset) do
-    render(conn, "new.html", changeset: changeset)
-  end
-  def new(conn, _) do
-    new(conn, changeset: User.changeset(%User{}, %{}))
-  end
+  def new(conn, changeset: changeset),
+    do: render(conn, "new.html", changeset: changeset)
+  def new(conn, _),
+    do: new(conn, changeset: User.changeset(%User{}, %{}))
 
   def create(conn, %{"user" => user_params}) do
     changeset = User.changeset(%User{}, user_params)

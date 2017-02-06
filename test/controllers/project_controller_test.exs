@@ -64,9 +64,9 @@ defmodule Backlash.ProjectControllerTest do
 
   test "PUT /projects/1/edit with valid attrs with logged in user", %{conn: conn, user: user} do
     conn = assign(conn, :current_user, user)
-    project = insert(:project)
+    project = Repo.insert!(Project.changeset(%Project{}, %{name: "Noosfero", author_id: user.id}))
     name = project.name
-    proj_params = params_for(:project, name: "a new_name")
+    proj_params = %{name: "newname"}
     patch conn, project_path(conn, :update, project, %{"project" => proj_params})
     updated_project = Repo.get(Project, project.id)
     refute updated_project.name==name
@@ -74,8 +74,8 @@ defmodule Backlash.ProjectControllerTest do
 
   test "GET /projects/1/edit", %{conn: conn, user: user} do
     conn = assign(conn, :current_user, user)
-    project = insert(:project)
-    conn = get(conn, project_path(conn, :edit, project))
+    project = Repo.insert!(Project.changeset(%Project{}, %{name: "Noosfero", author_id: user.id}))
+    conn = get(conn, project_path(conn, :edit, project.id))
     assert html_response(conn, 200) =~ "Noosfero"
   end
 end

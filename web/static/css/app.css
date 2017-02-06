@@ -11,6 +11,10 @@ body {
   background-color: rgba(183, 183, 183, 0.14);
 }
 
+main {
+  margin-bottom: 100px;
+}
+
 .main-body {
   display: flex;
 }
@@ -172,3 +176,4 @@ h2 {
 .popover .popover-content {
   width: 100%;
 }
+

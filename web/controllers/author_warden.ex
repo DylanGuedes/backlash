@@ -4,25 +4,22 @@ defmodule Backlash.AuthorWarden do
   import Backlash.Router.Helpers
 
   alias Backlash.User
+  alias Backlash.Repo
 
   def init(opts) do
     opts
   end
 
   def call(conn, opts) do
-    id = String.to_integer(Map.fetch!(conn.params, "id"))
-    if conn.assigns[:current_user] do
-      if conn.assigns.current_user.id == id do
-        conn
-      else
-        conn
-        |> put_flash(:error, "You are not allowed to do it")
-        |> redirect(to: page_path(conn, :index))
-        |> halt()
-      end
+    id = Map.fetch!(conn.params, "id")
+    handler = Keyword.fetch!(opts, :handler)
+    entity = Repo.get(handler, id)
+
+    if conn.assigns.current_user.id == entity.author_id do
+      conn
     else
       conn
-      |> put_flash(:error, "You must be logged in to access that page")
+      |> put_flash(:error, "You are not allowed to do it")
       |> redirect(to: page_path(conn, :index))
       |> halt()
     end
