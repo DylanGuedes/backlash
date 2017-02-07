@@ -30,7 +30,10 @@ defmodule Backlash.SetupController do
 
   def create(conn, %{"setup" => setup_params, "project_id" => project_id}) do
     project = Repo.get(Project, project_id)
-    changeset = Setup.changeset(%Setup{}, setup_params)
+    user = conn.assigns[:current_user]
+    opts = Map.put(setup_params, "author_id", user.id)
+
+    changeset = Setup.changeset(%Setup{}, opts)
     case Repo.insert(changeset) do
       {:ok, stp} ->
         {:ok, _} = Project.associate_with_setup(project, stp)
@@ -41,7 +44,9 @@ defmodule Backlash.SetupController do
     end
   end
   def create(conn, %{"setup" => setup_params}) do
-    changeset = Setup.changeset(%Setup{}, setup_params)
+    user = conn.assigns[:current_user]
+    opts = Map.put(setup_params, "author_id", user.id)
+    changeset = Setup.changeset(%Setup{}, opts)
     case Repo.insert(changeset) do
       {:ok, stp} ->
         show(conn, setup: stp)
@@ -108,5 +113,11 @@ defmodule Backlash.SetupController do
     conn
     |> put_flash(:info, "Setup changed")
     |> redirect(to: setup_path(conn, :show, id))
+  end
+
+  def my_setups(conn, _) do
+    q = from p in Setup, preload: [:author, :projects, :target], where: p.author_id==^conn.assigns[:current_user].id
+    setups = Repo.all q
+    render(conn, "my_setups.html", setups: setups)
   end
 end

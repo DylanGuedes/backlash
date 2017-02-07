@@ -1,0 +1,7 @@
+<h1>My Setups</h1>
+
+<div class="row">
+  <%= for stp <- @setups do %>
+    <%= render "setup.html", conn: @conn, stp: stp %>
+  <% end %>
+</div>

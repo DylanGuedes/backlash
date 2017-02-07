@@ -98,4 +98,10 @@ defmodule Backlash.ProjectController do
     projects = Repo.all(q) |> Enum.with_index
     render(conn, "ranking.html", projects: projects)
   end
+
+  def my_projects(conn, _) do
+    q = from p in Project, preload: :author, where: p.author_id==^conn.assigns[:current_user].id
+    projects = Repo.all q
+    render(conn, "my_projects.html", projects: projects)
+  end
 end

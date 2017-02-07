@@ -49,8 +49,9 @@ defmodule Backlash.Setup do
   @spec changeset(t, map) :: t
   def changeset(struct, params \\ :empty) do
     struct
-    |> cast(params, [:name, :target_id, :script])
+    |> cast(params, [:name, :target_id, :script, :author_id])
     |> validate_required([:name])
+    |> assoc_constraint(:author)
     |> unique_constraint(:name)
     |> validate_length(:name, [min: 3, max: 120])
     |> cast_assoc(:target, required: false)

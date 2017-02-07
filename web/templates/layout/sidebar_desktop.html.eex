@@ -5,7 +5,7 @@
     </div>
     <%= if @current_user do %>
       <div class="item section-item">
-        <%= link("My Projects", to: project_path(@conn, :index)) %>
+        <%= link("My Projects", to: project_path(@conn, :my_projects)) %>
       </div>
     <% end %>
     <div class="item section-item">
@@ -22,7 +22,7 @@
     </div>
     <%= if @current_user do %>
       <div class="item section-item">
-        <%= link("My Setups", to: setup_path(@conn, :index)) %>
+        <%= link("My Setups", to: setup_path(@conn, :my_setups)) %>
       </div>
       <div class="item section-item">
         <%= link("New Setup", to: setup_path(@conn, :new)) %>

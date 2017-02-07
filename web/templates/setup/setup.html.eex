@@ -12,7 +12,7 @@
         </div>
         <%= if @stp.author do %>
           <div class="author">
-            <p>Created by <%= @stp.author.name %></p>
+            <p>Created by <%= link(@stp.author.username, to: user_path(@conn, :show, @stp.author_id)) %></p>
           </div>
         <% end %>
 

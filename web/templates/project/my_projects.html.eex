@@ -1,0 +1,5 @@
+<h1>My projects</h1>
+
+<%= for proj <- @projects do %>
+  <%= render "project.html", project: proj, conn: @conn, current_user: @current_user %>
+<% end %>
