@@ -20,17 +20,22 @@
     <div class="item section-title">
       <%= link("Setups", to: setup_path(@conn, :index)) %>
     </div>
-    <div class="item section-item">
-      <%= link("My Setups", to: setup_path(@conn, :index)) %>
-    </div>
+    <%= if @current_user do %>
+      <div class="item section-item">
+        <%= link("My Setups", to: setup_path(@conn, :index)) %>
+      </div>
+      <div class="item section-item">
+        <%= link("New Setup", to: setup_path(@conn, :new)) %>
+      </div>
+    <% end %>
     <div class="item section-item">
       <%= link("Statistics", to: setup_path(@conn, :index)) %>
     </div>
     <div class="item section-item">
-      <%= link("Guides", to: setup_path(@conn, :index)) %>
+      <%= link("Ranking", to: setup_path(@conn, :index)) %>
     </div>
     <div class="item section-item">
-      <%= link("New Setup", to: setup_path(@conn, :new)) %>
+      <%= link("Guide", to: setup_path(@conn, :index)) %>
     </div>
   </div>
 
@@ -38,9 +43,11 @@
     <div class="item section-title">
       <%= link("Targets", to: target_path(@conn, :index)) %>
     </div>
-    <div class="item section-item">
-      <%= link("My Targets", to: project_path(@conn, :index)) %>
-    </div>
+    <%= if @current_user do %>
+      <div class="item section-item">
+        <%= link("My Targets", to: project_path(@conn, :index)) %>
+      </div>
+    <% end %>
     <div class="item section-item">
       <%= link("Statistics", to: project_path(@conn, :index)) %>
     </div>

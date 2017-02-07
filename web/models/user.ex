@@ -17,6 +17,7 @@ defmodule Backlash.User do
   alias Backlash.Project
   alias Backlash.Repo
   alias Backlash.Reputation
+  alias Backlash.Setup
 
   @typedoc """
   User struct
@@ -36,6 +37,7 @@ defmodule Backlash.User do
 
     has_many :created_projects, Project
     has_many :reputed_projects, Reputation
+    has_many :created_setups, Setup
 
     timestamps()
   end
@@ -147,5 +149,4 @@ defmodule Backlash.User do
       {:error, "Can't unrepute."}
     end
   end
-
 end

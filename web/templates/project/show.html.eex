@@ -3,5 +3,7 @@
 
   <%= render "project.html", project: @project, conn: @conn, current_user: @current_user %>
 
-  <%= render "setups_for_project.html", project: @project, conn: @conn %>
+  <%= for stp <- @project.setups do %>
+    <%= render Backlash.SetupView, "setup.html", stp: stp, conn: @conn %>
+  <% end %>
 </div>

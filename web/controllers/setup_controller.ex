@@ -6,9 +6,14 @@ defmodule Backlash.SetupController do
   alias Backlash.Project
   alias Backlash.Target
   alias Backlash.ProjectSetup
+  alias Backlash.Warden
+  alias Backlash.AuthorWarden
+
+  plug Warden when action in [:new, :update, :edit, :create]
+  plug AuthorWarden, [handler: Setup] when action in [:update, :edit]
 
   def index(conn, _) do
-    setups = Repo.all(from p in Setup, preload: [:projects, :target])
+    setups = Repo.all(from p in Setup, preload: [:projects, :target, :author])
     render(conn, "index.html", setups: setups)
   end
 

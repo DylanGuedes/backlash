@@ -4,6 +4,7 @@
 @import "header";
 @import "project";
 @import "sidebar";
+@import "setup";
 
 body {
   font-family: "Cantarell";

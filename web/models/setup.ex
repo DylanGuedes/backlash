@@ -21,6 +21,8 @@ defmodule Backlash.Setup do
   alias Backlash.Setup
   alias Backlash.ProjectSetup
   alias Backlash.Project
+  alias Backlash.Target
+  alias Backlash.User
 
   @typedoc """
   Setup struct
@@ -37,8 +39,9 @@ defmodule Backlash.Setup do
     field :name, :string
     field :script, :string
 
-    many_to_many :projects, Backlash.Project, join_through: ProjectSetup
-    belongs_to :target, Backlash.Target
+    many_to_many :projects, Project, join_through: ProjectSetup
+    belongs_to :target, Target
+    belongs_to :author, User
 
     timestamps()
   end
@@ -78,5 +81,4 @@ defmodule Backlash.Setup do
     ids = Repo.all(used_projects_ids(setup))
     from p in Project, where: not p.id in ^ids
   end
-
 end

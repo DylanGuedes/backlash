@@ -1,0 +1,32 @@
+<div class="setup">
+  <div class="col-md-3 col-sm-6">
+    <div class="thumbnail">
+      <div class="caption">
+        <h4><%= link(@stp.name, to: setup_path(@conn, :show, @stp.id)) %></h4>
+        <div>
+          <%= for proj <- @stp.projects do %>
+            <span class="label label-default">
+              <%= link(proj.name, to: project_path(@conn, :show, proj.id)) %>
+            </span>
+          <% end %>
+        </div>
+        <%= if @stp.author do %>
+          <div class="author">
+            <p>Created by <%= @stp.author.name %></p>
+          </div>
+        <% end %>
+
+        <%= if @stp.target do %>
+          <div class="setup-target">
+            <p>
+            <%= if @stp.target && @stp.target.image do %>
+              <img src="<%= Backlash.ImageUploader.url({@stp.target.image.file_name, @stp.target.image})%>" class="target-logo"/>
+            <% end %>
+            for <%= link(@stp.target.name, to: target_path(@conn, :show, @stp.target.id)) %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

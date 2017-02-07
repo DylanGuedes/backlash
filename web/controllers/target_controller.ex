@@ -26,7 +26,7 @@ defmodule Backlash.TargetController do
   end
 
   def show(conn, target: target),
-    do: render(conn, "show.html", target: Repo.preload(target, [{:setups, :projects}]))
+    do: render(conn, "show.html", target: Repo.preload(target, [{:setups, [:projects, :author, :target]}]))
   def show(conn, %{"id" => id}),
     do: show(conn, target: Target |> Repo.get(id))
 end

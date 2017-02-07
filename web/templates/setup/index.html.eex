@@ -1,31 +1,10 @@
 <h1>Setup</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Projects</th>
-      <th>Target</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= for stp <- @setups do %>
-      <tr>
-        <td><%= link(stp.name, to: setup_path(@conn, :show, stp.id)) %></td>
-        <% if stp.target do %>
-          <td><%= link(stp.target.name, to: target_path(@conn, :show, stp.target.id)) %></td>
-        <% end %>
-        <td>
-          <%= for proj <- stp.projects do %>
-            <span class="label label-default">
-              <%= link(proj.name, to: project_path(@conn, :show, proj.id)) %>
-            </span>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <%= for stp <- @setups do %>
+    <%= render "setup.html", conn: @conn, stp: stp %>
+  <% end %>
+</div>
 
 <%= link("New Setup", to: setup_path(@conn, :new), class: "hollow button") %>
+
